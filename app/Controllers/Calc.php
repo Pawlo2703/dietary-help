@@ -29,7 +29,7 @@ class Calc extends Controller {
         $user->setWeight($this->getParam('weight'));
         $user->setHeight($this->getParam('height'));
         $user->setGender($this->getParam('gender'));
-        $user->setBmr($user->bmr());
+        $user->setBmr($user->basicMetabolismRate());
         
         $user->setCardio($this->getParam('cardio'));
         $user->setCardiotime($this->getParam('cardiotime'));
@@ -38,12 +38,12 @@ class Calc extends Controller {
         $user->setWorkouttime($this->getParam('workouttime'));
         $user->setWorkouttime($this->getParam('workouttimesaweek'));
 
-        $user->setTea($user->tea());
+        $user->setTea($user->totalExpenditureActivity());
         
         $user->setActivity($this->getParam('activity'));
-        $user->setNeat($user->neat());
-        $user->setTef($user->tef());
-        $user->setTdee($user->tdee());
+        $user->setNeat($user->nonExerciseActivityThermogenesis());
+        $user->setTef($user->thermicEffectOfFood());
+        $user->setTdee($user->totaldailyEnergyExpenditure());
     }
 
     /**

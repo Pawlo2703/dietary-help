@@ -10,51 +10,51 @@ class Calculator {
     /**
      * BMR Multiplers
      */
-    const weightMultipler = 9.99;
-    const heightMultipler = 6.25;
-    const ageMultipler = 4.92;
-    const maleDifference = 5;
-    const femaleDifference = -161;
+    const WEIGHTMULTIPLER = 9.99;
+    const HEIGHTMULTIPLER = 6.25;
+    const AGEMULTIPLER = 4.92;
+    const MALEDIFFERENCE = 5;
+    const FEMALEDIFFERENCE = -161;
 
     /*
      * Cardio & Workout Multiplers
      */
 
     /* Calories burned per minute of low intensity cardio + EPOC */
-    const lowcardio = 5;
-    const lowcardioEPOC = 5;
+    const LOWCARDIO = 5;
+    const LOWCARDIOEPOC = 5;
 
     /* Calories burned per minute of moderate intensity cardio + EPOC */
-    const moderatecardio = 7.5;
-    const moderatecardioEPOC = 35;
+    const MODERATECARDIO = 7.5;
+    const MODERATECARDIOEPOC = 35;
 
     /* Calories burned per minute of high intensity cardio + EPOC */
-    const intensecardio = 10;
-    const intensecardioEPOC = 180;
+    const INTENSECARDIO = 10;
+    const INTENSECARDIOEPOC = 180;
 
     /* Calories burned per minute of low intensity workout + EPOC */
-    const lowworkout = 7;
-    const lowworkoutEPOC = 0.04;
+    const LOWWORKOUT = 7;
+    const LOWWORKOUTEPOC = 0.04;
 
     /* Calories burned per minute of moderate intensity workout + EPOC */
-    const moderateworkout = 8;
-    const moderateworkoutEPOC = 0.055;
+    const MODERATEWORKOUT = 8;
+    const MODERATEWORKOUTEPOC = 0.055;
 
     /* Calories burned per minute of high intensity workout + EPOC */
-    const intenseworkout = 10;
-    const intenseworkoutEPOC = 0.07;
+    const INTENSEWORKOUT = 10;
+    const INTENSEWORKOUTEPOC = 0.07;
 
     /* low level of non-exercise activity thermogenesis */
-    const setendaryactivity = 200;
+    const SETENDARYACTIVITY = 200;
 
     /* moderate level of non-exercise activity thermogenesis */
-    const moderateactivity = 500;
+    const MODERATEACTIVITY = 500;
 
     /* high level of non-exercise activity thermogenesis */
-    const intenseactivity = 900;
+    const INTENSEACTIVITY = 900;
 
     /* Thermic effect of food */
-    const tef = 0.1;
+    const TEF = 0.1;
 
     /**
      *
@@ -319,88 +319,56 @@ class Calculator {
     /**
      * Calculates Basic Metabolism Rate
      */
-    public function bmr() {
-
-        $weight = $this->weight;
-        $height = $this->height;
-        $age = $this->age;
-        $bmr = $this->bmr;
-        $gender = $this->gender;
+    public function basicMetabolismRate() {
 
         if ($this->gender == 'Male') {
-            $bmr = (self::weightMultipler * $weight) + (self::heightMultipler * $height) - (self::ageMultipler * $age) + self::maleDifference;
-            return $bmr;
+            $this->bmr = (self::WEIGHTMULTIPLER * $this->weight) + (self::HEIGHTMULTIPLER * $this->height) - (self::AGEMULTIPLER * $this->age) + self::MALEDIFFERENCE;
+    
         }
-        $bmr = (self::weightMultipler * $weight) + (self::heightMultipler * $height) - (self::ageMultipler * $age) + self::femaleDifference;
-        return $bmr;
+        $this->bmr = (self::WEIGHTMULTIPLER * $this->weight) + (self::HEIGHTMULTIPLER * $this->height) - (self::AGEMULTIPLER * $this->age) + self::FEMALEDIFFERENCE;
     }
 
-    public function tea() {
-
-        $bmr = $this->bmr;
-        $tea = $this->tea;
-        $cardiotime = $this->cardiotime;
-        $workouttime = $this->workouttime;
-        $cardiotimesaweek = $this->cardiotimesaweek;
-        $workouttimesaweek = $this->workouttimesaweek;
-        $teacardio = $this->teacardio;
-        $teaworkout = $this->teaworkout; 
-
+    public function totalExpenditureActivity() {
 
         if ($this->cardio == 'Low') {
-            $teacardio = ((self::lowcardio * $cardiotime) + self::lowcardioEPOC) * $cardiotimesaweek;
+            $this->teacardio = ((self::LOWCARDIO * $this->cardiotime) + self::LOWCARDIOEPOC) * $this->cardiotimesaweek;
         } else if ($this->cardio == 'Moderate') {
-            $teacardio = ((self::moderatecardio * $cardiotime) + self::moderatecardioEPOC) * $cardiotimesaweek;
+            $this->teacardio = ((self::MODERATECARDIO * $this->cardiotime) + self::MODERATECARDIOEPOC) * $this->cardiotimesaweek;
         } else if ($this->cardio == 'Intense') {
-            $teacardio = ((self::intensecardio * $cardiotime) + self::intensecardioEPOC) * $cardiotimesaweek;
+            $this->teacardio = ((self::INTENSECARDIO * $this->cardiotime) + self::INTENSECARDIOEPOC) * $this->cardiotimesaweek;
         }
 
         if ($this->workout == 'Low') {
-            $teaworkout = (self::lowworkout * $workouttime + self::lowworkoutEPOC * $bmr) * $workouttimesaweek;
+            $this->teaworkout = (self::LOWWORKOUT * $this->workouttime + self::LOWWORKOUTEPOC * $this->bmr) * $this->workouttimesaweek;
         } else if ($this->workout == 'Moderate') {
-            $teaworkout = (self::moderateworkout * $workouttime + self::moderateworkoutEPOC * $bmr) * $workouttimesaweek;
+            $this->teaworkout = (self::MODERATEWORKOUT * $this->workouttime + self::MODERATEWORKOUTEPOC * $this->bmr) * $this->workouttimesaweek;
         } else if ($this->workout == 'Intense') {
-            $teaworkout = (self::intenseworkout * $workouttime + self::intenseworkoutEPOC * $bmr) * $workouttimesaweek;
+            $this->teaworkout = (self::INTENSEWORKOUT * $this->workouttime + self::MODERATEWORKOUTEPOC * $this->bmr) * $this->workouttimesaweek;
         }
 
-        $tea = $teaworkout + $teacardio;
-        return $tea;
+        $this->tea = $this->teaworkout + $this->teacardio;
     }
 
-    public function neat() {
+    public function nonExerciseActivityThermogenesis() {
 
         if ($this->activity == 'Setendary') {
-            $neat = (self::setendaryactivity );
-            return $neat;
+            $this->neat = (self::SETENDARYACTIVITY );
         } else if ($this->activity == 'Moderate') {
-            $neat = (self::moderateactivity);
-            return $neat;
+            $this->neat = (self::MODERATEACTIVITY);
         } else if ($this->activity == 'Intense') {
-            $neat = (self::intenseactivity );
-            return $neat;
+            $this->neat = (self::INTENSEACTIVITY );
         }
     }
 
-    public function tef() {
-        $bmr = $this->bmr;
-        $tea = $this->tea;
-        $neat = $this->neat;
+    public function  thermicEffectOfFood() {
 
-        $tef = ($bmr + ($tea / 7) + $neat) * self::tef;
-        return $tef;
+        $this->tef = ($this->bmr + ($this->tea / 7) + $this->neat) * self::TEF;
     }
 
-    public function tdee() {
-        $bmr = $this->bmr;
-        $tea = $this->tea;
-        $neat = $this->neat;
-        $tef = $this->tef;
-        $teacardio = $this->teacardio;
-        $teaworkout = $this->teaworkout; 
-
-        $tdee = $bmr + ($tea / 7) + $neat + $tef;
-        var_dump($bmr, $tea, $neat, $tef, $tdee,$teacardio,$teaworkout);
-        return $tdee;
+    public function totaldailyEnergyExpenditure() {
+      
+        $this->tdee = $this->bmr + ($this->tea / 7) + $this->neat + $this->tef;
+        var_dump($this->bmr,$this->tea,$this->neat, $this->tef);
     }
 
 }
