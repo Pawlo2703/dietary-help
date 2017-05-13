@@ -323,7 +323,6 @@ class Calculator {
 
         if ($this->gender == 'Male') {
             $this->bmr = (self::WEIGHTMULTIPLER * $this->weight) + (self::HEIGHTMULTIPLER * $this->height) - (self::AGEMULTIPLER * $this->age) + self::MALEDIFFERENCE;
-    
         }
         $this->bmr = (self::WEIGHTMULTIPLER * $this->weight) + (self::HEIGHTMULTIPLER * $this->height) - (self::AGEMULTIPLER * $this->age) + self::FEMALEDIFFERENCE;
     }
@@ -345,7 +344,7 @@ class Calculator {
         } else if ($this->workout == 'Intense') {
             $this->teaworkout = (self::INTENSEWORKOUT * $this->workouttime + self::MODERATEWORKOUTEPOC * $this->bmr) * $this->workouttimesaweek;
         }
-
+        
         $this->tea = $this->teaworkout + $this->teacardio;
     }
 
@@ -360,15 +359,19 @@ class Calculator {
         }
     }
 
-    public function  thermicEffectOfFood() {
+    public function thermicEffectOfFood() {
+        $this->basicMetabolismRate();
+        $this->totalExpenditureActivity();
+        $this->nonExerciseActivityThermogenesis();
 
         $this->tef = ($this->bmr + ($this->tea / 7) + $this->neat) * self::TEF;
     }
 
-    public function totaldailyEnergyExpenditure() {
-      
+    public function totalDailyEnergyExpenditure() {
+        $this->thermicEffectOfFood();
+        
         $this->tdee = $this->bmr + ($this->tea / 7) + $this->neat + $this->tef;
-        var_dump($this->bmr,$this->tea,$this->neat, $this->tef);
+        var_dump($this->tdee);
     }
 
 }

@@ -28,21 +28,14 @@ class Calc extends Controller {
         $user->setAge($this->getParam('age'));
         $user->setWeight($this->getParam('weight'));
         $user->setHeight($this->getParam('height'));
-        $user->setGender($this->getParam('gender'));
-        $user->setBmr($user->basicMetabolismRate());
-        
+        $user->setGender($this->getParam('gender'));        
         $user->setCardio($this->getParam('cardio'));
         $user->setCardiotime($this->getParam('cardiotime'));
-        $user->setCardiotime($this->getParam('cardiotimesaweek'));
+        $user->setCardiotimesaweek($this->getParam('cardiotimesaweek'));
         $user->setWorkout($this->getParam('workout'));
         $user->setWorkouttime($this->getParam('workouttime'));
-        $user->setWorkouttime($this->getParam('workouttimesaweek'));
-
-        $user->setTea($user->totalExpenditureActivity());
-        
+        $user->setWorkouttimesaweek($this->getParam('workouttimesaweek'));        
         $user->setActivity($this->getParam('activity'));
-        $user->setNeat($user->nonExerciseActivityThermogenesis());
-        $user->setTef($user->thermicEffectOfFood());
         $user->setTdee($user->totaldailyEnergyExpenditure());
     }
 
