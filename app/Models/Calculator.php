@@ -16,43 +16,6 @@ class Calculator {
     const MALEDIFFERENCE = 5;
     const FEMALEDIFFERENCE = -161;
 
-    /*
-     * Cardio & Workout Multiplers
-     */
-
-    /* Calories burned per minute of low intensity cardio + EPOC */
-    const LOWCARDIO = 5;
-    const LOWCARDIOEPOC = 5;
-
-    /* Calories burned per minute of moderate intensity cardio + EPOC */
-    const MODERATECARDIO = 7.5;
-    const MODERATECARDIOEPOC = 35;
-
-    /* Calories burned per minute of high intensity cardio + EPOC */
-    const INTENSECARDIO = 10;
-    const INTENSECARDIOEPOC = 180;
-
-    /* Calories burned per minute of low intensity workout + EPOC */
-    const LOWWORKOUT = 7;
-    const LOWWORKOUTEPOC = 0.04;
-
-    /* Calories burned per minute of moderate intensity workout + EPOC */
-    const MODERATEWORKOUT = 8;
-    const MODERATEWORKOUTEPOC = 0.055;
-
-    /* Calories burned per minute of high intensity workout + EPOC */
-    const INTENSEWORKOUT = 10;
-    const INTENSEWORKOUTEPOC = 0.07;
-
-    /* low level of non-exercise activity thermogenesis */
-    const SETENDARYACTIVITY = 200;
-
-    /* moderate level of non-exercise activity thermogenesis */
-    const MODERATEACTIVITY = 500;
-
-    /* high level of non-exercise activity thermogenesis */
-    const INTENSEACTIVITY = 900;
-
     /* Thermic effect of food */
     const TEF = 0.1;
 
@@ -88,39 +51,9 @@ class Calculator {
 
     /**
      *
-     * @var workout
-     */
-    private $workout;
-
-    /**
-     *
-     * @var cardio
-     */
-    private $cardio;
-
-    /**
-     *
-     * @var acitivity
-     */
-    private $activity;
-
-    /**
-     *
      * @var bmr
      */
     private $bmr;
-
-    /**
-     *
-     * @var workouttime
-     */
-    private $workouttime;
-
-    /**
-     *
-     * @var cardiotime
-     */
-    private $cardiotime;
 
     /**
      *
@@ -139,18 +72,6 @@ class Calculator {
      * @var tea
      */
     private $tea;
-
-    /**
-     *
-     * @var carditimesaweek
-     */
-    private $cardiotimesaweek;
-
-    /**
-     *
-     * @var workouttimesaweek
-     */
-    private $workouttimesaweek;
 
     /**
      *
@@ -184,26 +105,6 @@ class Calculator {
         return $this->gender;
     }
 
-    public function getWorkout() {
-        return $this->workout;
-    }
-
-    public function getWorkouttime() {
-        return $this->workouttime;
-    }
-
-    public function getCardio() {
-        return $this->cardio;
-    }
-
-    public function getCardiotime() {
-        return $this->cardiotime;
-    }
-
-    public function getActivity() {
-        return $this->activity;
-    }
-
     public function getBmr() {
         return $this->bmr;
     }
@@ -231,15 +132,7 @@ class Calculator {
     public function getTdee() {
         return $this->Tdee;
     }
-
-    public function getCardiotimesaweek() {
-        return $this->cardiotimesaweek;
-    }
-
-    public function getWorkouttimesaweek() {
-        return $this->workouttimesaweek;
-    }
-
+    
     public function setId($id) {
         $this->id = $id;
     }
@@ -258,26 +151,6 @@ class Calculator {
 
     public function setGender($gender) {
         $this->gender = $gender;
-    }
-
-    public function setWorkout($workout) {
-        $this->workout = $workout;
-    }
-
-    public function setWorkouttime($workouttime) {
-        $this->workouttime = $workouttime;
-    }
-
-    public function setCardiotime($cardiotime) {
-        $this->cardiotime = $cardiotime;
-    }
-
-    public function setCardio($cardio) {
-        $this->cardio = $cardio;
-    }
-
-    public function setActivity($activity) {
-        $this->activity = $activity;
     }
 
     public function setBmr($bmr) {
@@ -306,14 +179,6 @@ class Calculator {
 
     public function setTdee($tdee) {
         $this->tdee = $tdee;
-    }
-
-    public function setWorkouttimesaweek($workouttimesaweek) {
-        $this->workouttimesaweek = $workouttimesaweek;
-    }
-
-    public function setCardiotimesaweek($cardiotimesaweek) {
-        $this->cardiotimesaweek = $cardiotimesaweek;
     }
 
     /**
