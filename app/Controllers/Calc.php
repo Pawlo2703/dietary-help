@@ -28,7 +28,8 @@ class Calc extends Controller {
         $user->setAge($this->getParam('age'));
         $user->setWeight($this->getParam('weight'));
         $user->setHeight($this->getParam('height'));
-        $user->bmr();
+        $user->setGender($this->getParam('gender'));
+        $user->setBmr($user->bmr());
         
         $user->setCardio($this->getParam('cardio'));
         $user->setCardiotime($this->getParam('cardiotime'));
@@ -36,12 +37,13 @@ class Calc extends Controller {
         $user->setWorkout($this->getParam('workout'));
         $user->setWorkouttime($this->getParam('workouttime'));
         $user->setWorkouttime($this->getParam('workouttimesaweek'));
-        $user->tea();
+
+        $user->setTea($user->tea());
         
         $user->setActivity($this->getParam('activity'));
-        $user->neat();
-        $user->tef();
-        $user->tdee();
+        $user->setNeat($user->neat());
+        $user->setTef($user->tef());
+        $user->setTdee($user->tdee());
     }
 
     /**

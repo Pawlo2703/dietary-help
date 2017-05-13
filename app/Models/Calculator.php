@@ -152,6 +152,18 @@ class Calculator {
      */
     private $workouttimesaweek;
 
+    /**
+     *
+     * @var teacardio
+     */
+    private $teacardio;
+
+    /**
+     *
+     * @var teaworkout
+     */
+    private $teaworkout;
+
     public function getId() {
         return $this->id;
     }
@@ -198,6 +210,14 @@ class Calculator {
 
     public function getTea() {
         return $this->tea;
+    }
+
+    public function getTeacardio() {
+        return $this->teacardio;
+    }
+
+    public function getTeaworkout() {
+        return $this->teaworkout;
     }
 
     public function getNeat() {
@@ -268,6 +288,14 @@ class Calculator {
         $this->tea = $tea;
     }
 
+    public function setTeaworkout($teaworkout) {
+        $this->teaworkout = $teaworkout;
+    }
+
+    public function setTeacardio($teacardio) {
+        $this->teacardio = $teacardio;
+    }
+
     public function setNeat($neat) {
         $this->neat = $neat;
     }
@@ -297,14 +325,14 @@ class Calculator {
         $height = $this->height;
         $age = $this->age;
         $bmr = $this->bmr;
+        $gender = $this->gender;
 
-        if ($this->gender == 'male') {
+        if ($this->gender == 'Male') {
             $bmr = (self::weightMultipler * $weight) + (self::heightMultipler * $height) - (self::ageMultipler * $age) + self::maleDifference;
-          //  return $bmr;
+            return $bmr;
         }
         $bmr = (self::weightMultipler * $weight) + (self::heightMultipler * $height) - (self::ageMultipler * $age) + self::femaleDifference;
-      //  return $bmr;
-         
+        return $bmr;
     }
 
     public function tea() {
@@ -315,48 +343,42 @@ class Calculator {
         $workouttime = $this->workouttime;
         $cardiotimesaweek = $this->cardiotimesaweek;
         $workouttimesaweek = $this->workouttimesaweek;
-
+        $teacardio = $this->teacardio;
+        $teaworkout = $this->teaworkout; 
 
 
         if ($this->cardio == 'Low') {
-            $teacardio = (self::lowcardio * $cardiotime + self::lowcardioEPOC) * $cardiotimesaweek;
-          //  return $teacardio;
+            $teacardio = ((self::lowcardio * $cardiotime) + self::lowcardioEPOC) * $cardiotimesaweek;
         } else if ($this->cardio == 'Moderate') {
-            $teacardio = (self::moderatecardio * $cardiotime + self::moderatecardioEPOC) * $cardiotimesaweek;
-          //  return $teacardio;
+            $teacardio = ((self::moderatecardio * $cardiotime) + self::moderatecardioEPOC) * $cardiotimesaweek;
         } else if ($this->cardio == 'Intense') {
-            $teacardio = (self::intensecardio * $cardiotime + self::intensecardioEPOC) * $cardiotimesaweek;
-          //  return $teacardio;
+            $teacardio = ((self::intensecardio * $cardiotime) + self::intensecardioEPOC) * $cardiotimesaweek;
         }
 
         if ($this->workout == 'Low') {
             $teaworkout = (self::lowworkout * $workouttime + self::lowworkoutEPOC * $bmr) * $workouttimesaweek;
-          //  return $teaworkout;
         } else if ($this->workout == 'Moderate') {
             $teaworkout = (self::moderateworkout * $workouttime + self::moderateworkoutEPOC * $bmr) * $workouttimesaweek;
-          //  return $teaworkout;
         } else if ($this->workout == 'Intense') {
             $teaworkout = (self::intenseworkout * $workouttime + self::intenseworkoutEPOC * $bmr) * $workouttimesaweek;
-          //  return $teaworkout;
         }
 
         $tea = $teaworkout + $teacardio;
-        
+        return $tea;
     }
 
     public function neat() {
 
         if ($this->activity == 'Setendary') {
-            $neat = (self::setendaryactivity );  
-          //  return $neat;
+            $neat = (self::setendaryactivity );
+            return $neat;
         } else if ($this->activity == 'Moderate') {
-            $neat = (self::moderateactivity);  
-          //  return $neat;
+            $neat = (self::moderateactivity);
+            return $neat;
         } else if ($this->activity == 'Intense') {
-            $neat = (self::intenseactivity );  
-          //  return $neat;
+            $neat = (self::intenseactivity );
+            return $neat;
         }
-        
     }
 
     public function tef() {
@@ -365,7 +387,7 @@ class Calculator {
         $neat = $this->neat;
 
         $tef = ($bmr + ($tea / 7) + $neat) * self::tef;
-      //  return $tef;
+        return $tef;
     }
 
     public function tdee() {
@@ -373,10 +395,12 @@ class Calculator {
         $tea = $this->tea;
         $neat = $this->neat;
         $tef = $this->tef;
+        $teacardio = $this->teacardio;
+        $teaworkout = $this->teaworkout; 
 
         $tdee = $bmr + ($tea / 7) + $neat + $tef;
-        var_dump($tdee);
-       // return $tdee;
+        var_dump($bmr, $tea, $neat, $tef, $tdee,$teacardio,$teaworkout);
+        return $tdee;
     }
 
 }
