@@ -14,13 +14,21 @@ class Controller {
     }
 
     public function getParam($name) {
-        if (isset($_POST[$name])) { //tam masz method post, formy ida postem, a tutaj ja pobieram dane z POSTa 
+        if (isset($_POST[$name])) {
             return $_POST[$name];
         }
 
         if (isset($_GET[$name])) {
             return $_GET[$name];
         }
+    }
+    
+    public function getParams($name) {       
+        
+        if((isset($GET[$name]) !== NULL) and (isset($POST[$name]) !== NULL)) {
+            return $_REQUEST($name);
+        }
+        
     }
 
     public function view($view, $data = []) {
