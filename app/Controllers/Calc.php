@@ -3,7 +3,11 @@
 namespace Tren\Controllers;
 
 use Tren\Core\Controller;
-use Tren\Models\Calculator;
+use Tren\Models\Calculator\Calculator;
+use Tren\Models\Calculator\Activities;
+use Tren\Models\Calculator\Activities\Person;
+use Tren\Models\Calculator\Activities\Cardio;
+use Tren\Models\Calculator\Activities\Workout;
 
 /**
  * Class Calc
@@ -11,7 +15,7 @@ use Tren\Models\Calculator;
 class Calc extends Controller {
 
     /**
-     * Displays calculator form
+     * Displays calculator forms
      */
     public function User() {
 
@@ -22,7 +26,7 @@ class Calc extends Controller {
      * 
      */
     public function saveMacros() {
-        $user = new Calculator();
+        $user = new Calculator;
         $id = ($this->session->get('zmienna2'));
 
         $user->setAge($this->getParam('age'));
