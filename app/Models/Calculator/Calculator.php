@@ -12,12 +12,6 @@ class Calculator {
 
     /**
      *
-     * @var id
-     */
-    private $id;
-
-    /**
-     *
      * @var bmr
      */
     private $bmr;
@@ -111,32 +105,32 @@ class Calculator {
     }
 
     /**
-     * Calculates Basic Metabolism Rate
+     * Calculates Basic Metabolism Rates
      */
     public function basicMetabolismRate() {
 
-        if ($this->gender == 'Male') {
-            $this->bmr = (self::WEIGHTMULTIPLER * $this->weight) + (self::HEIGHTMULTIPLER * $this->height) - (self::AGEMULTIPLER * $this->age) + self::MALEDIFFERENCE;
+        if ($person->gender == 'Male') {
+            $this->bmr = ($person::WEIGHTMULTIPLER * $person->weight) + ($person::HEIGHTMULTIPLER * $person->height) - ($person::AGEMULTIPLER * $person->age) + $person::MALEDIFFERENCE;
         }
-        $this->bmr = (self::WEIGHTMULTIPLER * $this->weight) + (self::HEIGHTMULTIPLER * $this->height) - (self::AGEMULTIPLER * $this->age) + self::FEMALEDIFFERENCE;
+        $this->bmr = (self::WEIGHTMULTIPLER * $person->weight) + ($person::HEIGHTMULTIPLER * $person->height) - ($person::AGEMULTIPLER * $person->age) + $person::FEMALEDIFFERENCE;
     }
 
     public function totalExpenditureActivity() {
 
-        if ($this->cardio == 'Low') {
-            $this->teacardio = ((self::LOWCARDIO * $this->cardiotime) + self::LOWCARDIOEPOC) * $this->cardiotimesaweek;
-        } else if ($this->cardio == 'Moderate') {
-            $this->teacardio = ((self::MODERATECARDIO * $this->cardiotime) + self::MODERATECARDIOEPOC) * $this->cardiotimesaweek;
-        } else if ($this->cardio == 'Intense') {
-            $this->teacardio = ((self::INTENSECARDIO * $this->cardiotime) + self::INTENSECARDIOEPOC) * $this->cardiotimesaweek;
+        if ($activities->cardio == 'Low') {
+            $this->teacardio = (($cardio::LOWCARDIO * $cardio->cardiotime) + $cardio::LOWCARDIOEPOC) * $cardio->cardiotimesaweek;
+        } else if ($activities->cardio == 'Moderate') {
+            $this->teacardio = (($cardio::MODERATECARDIO * $cardio->cardiotime) + $cardio::MODERATECARDIOEPOC) * $cardio->cardiotimesaweek;
+        } else if ($activities->cardio == 'Intense') {
+            $this->teacardio = (($cardio::INTENSECARDIO * $cardio->cardiotime) + $cardio::INTENSECARDIOEPOC) * $cardio->cardiotimesaweek;
         }
 
-        if ($this->workout == 'Low') {
-            $this->teaworkout = (self::LOWWORKOUT * $this->workouttime + self::LOWWORKOUTEPOC * $this->bmr) * $this->workouttimesaweek;
+        if ($activities->workout == 'Low') {
+            $this->teaworkout = ($workout::LOWWORKOUT * $workout->workouttime + $workout::LOWWORKOUTEPOC * $this->bmr) * $workout->workouttimesaweek;
         } else if ($this->workout == 'Moderate') {
-            $this->teaworkout = (self::MODERATEWORKOUT * $this->workouttime + self::MODERATEWORKOUTEPOC * $this->bmr) * $this->workouttimesaweek;
+            $this->teaworkout = ($workout::MODERATEWORKOUT * $workout->workouttime + $workout::MODERATEWORKOUTEPOC * $this->bmr) * $workout->workouttimesaweek;
         } else if ($this->workout == 'Intense') {
-            $this->teaworkout = (self::INTENSEWORKOUT * $this->workouttime + self::MODERATEWORKOUTEPOC * $this->bmr) * $this->workouttimesaweek;
+            $this->teaworkout = ($workout::INTENSEWORKOUT * $workout->workouttime + $workout::MODERATEWORKOUTEPOC * $this->bmr) * $workout->workouttimesaweek;
         }
 
         $this->tea = $this->teaworkout + $this->teacardio;
@@ -144,12 +138,12 @@ class Calculator {
 
     public function nonExerciseActivityThermogenesis() {
 
-        if ($this->activity == 'Setendary') {
-            $this->neat = (self::SETENDARYACTIVITY );
-        } else if ($this->activity == 'Moderate') {
-            $this->neat = (self::MODERATEACTIVITY);
-        } else if ($this->activity == 'Intense') {
-            $this->neat = (self::INTENSEACTIVITY );
+        if ($activities->activity == 'Setendary') {
+            $this->neat = ($activities::SETENDARYACTIVITY );
+        } else if ($activities->activity == 'Moderate') {
+            $this->neat = ($activities::MODERATEACTIVITY);
+        } else if ($activities->activity == 'Intense') {
+            $this->neat = ($activities::INTENSEACTIVITY );
         }
     }
 
