@@ -24,14 +24,14 @@ include('headfoot/header.php')
   <option >Moderate</option>
   <option >Intense</option></select>
 <label><b>Time:</b></label><input autocomplete="off" name="workouttime" type="text" placeholder="Time">
-<label><b>Times a week:</b></label><input autocomplete="off" name="workouttimesaweek" type="text" placeholder="Times per week">
+<label><b>Times a week:</b></label><input autocomplete="off" name="workouttimesperweek" type="text" placeholder="Times per week">
 
   <label><b>Cardio intensity:</b></label><select name="cardio">
   <option >Low</option>
   <option >Moderate</option>
   <option >Intense</option></select>
   <label><b>Time:</b></label><input autocomplete="off" name="cardiotime" type="text" placeholder="Time">
-<label><b>Times a week:</b></label><input autocomplete="off" name="cardiotimesaweek" type="text" placeholder="Times per week0">
+<label><b>Times a week:</b></label><input autocomplete="off" name="cardiotimesperweek" type="text" placeholder="Times per week0">
  
     <label><b>Daily activity outside the gym:</b></label><select name="activity">
   <option >Setendary</option>

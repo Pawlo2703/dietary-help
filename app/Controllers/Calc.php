@@ -3,6 +3,7 @@
 namespace Tren\Controllers;
 
 use Tren\Core\Controller;
+use Tren\Models\User;
 use Tren\Models\Calculator\Calculator;
 use Tren\Models\Calculator\Activities;
 use Tren\Models\Calculator\Activities\Person;
@@ -18,7 +19,7 @@ class Calc extends Controller {
      * Displays calculator forms
      */
     public function User() {
-
+        $this->session->loginCheck();
         $this->view('home/calculator');
     }
 
@@ -26,21 +27,16 @@ class Calc extends Controller {
      * 
      */
     public function saveMacros() {
-        $user = new Calculator;
-        $id = ($this->session->get('zmienna2'));
+        $this->session->loginCheck();
+        $params = $this->getParameters();
+        $calc = new Calculator();
+        $calc->init($params);
+        $calc->totaldailyEnergyExpenditure();
 
-        $user->setAge($this->getParam('age'));
-        $user->setWeight($this->getParam('weight'));
-        $user->setHeight($this->getParam('height'));
-        $user->setGender($this->getParam('gender'));        
-        $user->setCardio($this->getParam('cardio'));
-        $user->setCardiotime($this->getParam('cardiotime'));
-        $user->setCardiotimesaweek($this->getParam('cardiotimesaweek'));
-        $user->setWorkout($this->getParam('workout'));
-        $user->setWorkouttime($this->getParam('workouttime'));
-        $user->setWorkouttimesaweek($this->getParam('workouttimesaweek'));        
-        $user->setActivity($this->getParam('activity'));
-        $user->setTdee($user->totaldailyEnergyExpenditure());
+        $user = new User();
+        $result = $user->setCalories($calc->getTdee());
+        $id = ($this->session->get('zmienna2'));
+        $user->saveMacros($id);
     }
 
     /**
@@ -49,21 +45,6 @@ class Calc extends Controller {
     public function userTwo() {
 
         $this->view('home/details');
-    }
-
-    /**
-     * Saves user data
-     */
-    public function saveDetails() {
-        $user = new User();
-        $id = ($this->session->get('zmienna2'));
-
-        $user->setWeight($this->getParam('weight'));
-        $user->setState($this->getParam('state'));
-
-        $user->saveDetails($id);
-
-        header("Location: http://localhost/Tren/public/UserDetails/display");
     }
 
 }

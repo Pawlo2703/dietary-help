@@ -20,15 +20,14 @@ class Log extends Controller {
     }
 
     /**
-     * Creates user sESSION
+     * Creates user SESSION
      */
     public function Login() {
 
         $user = new User();
         $userId = $user->findByLogin($this->getParam('login'));
 
-        if (!$userId) {
-            echo 'nie ma takiego usera';
+        if (!$userId) {           
             $this->view('home/login');
             return;
         }

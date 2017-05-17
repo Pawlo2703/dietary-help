@@ -18,6 +18,7 @@ class UserDetails extends Controller {
     public function display($login = '') {
         $user = new User();
 
+        $this->session->loginCheck();
         $id = ($this->session->get('zmienna2'));
         var_dump($id);
         $user->load($id);

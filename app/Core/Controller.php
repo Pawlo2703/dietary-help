@@ -22,13 +22,14 @@ class Controller {
             return $_GET[$name];
         }
     }
-    
-    public function getParams($name) {       
-        
-        if((isset($GET[$name]) !== NULL) and (isset($POST[$name]) !== NULL)) {
-            return $_REQUEST($name);
+
+    public function getParameters() {
+        $params = array_merge($_POST, $_GET);
+        if ($params) {
+            return $params;
         }
-        
+
+        return [];
     }
 
     public function view($view, $data = []) {

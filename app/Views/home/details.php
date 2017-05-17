@@ -10,10 +10,10 @@ include('headfoot/header.php')
     ?>
 
 <div class="reg">
-    <h1>Give us more information about yourself:</h1>
+    
     <form method="post" action="http://localhost/Tren/public/Macros/saveDetails">
-       <input autocomplete="off" name="weight" type="text" placeholder="weight">
-      <select name="state">
+       <p>Current Weight:</p><input autocomplete="off" name="weight" type="text" placeholder="weight">
+      <p>Your goal:</p><select name="state">
   <option >Bulking</option>
   <option >Cutting</option>
 

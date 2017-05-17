@@ -64,5 +64,14 @@ class Session {
             }
         }
     }
+    /**
+     * Check if value 'zmienna' is empty
+     */
+    public function loginCheck() {
+        if ($_SESSION['zmienna'] == NULL) {
+            
+            header('Location: http://localhost/Tren/public/log/login');
+        }
+    }
 
 }

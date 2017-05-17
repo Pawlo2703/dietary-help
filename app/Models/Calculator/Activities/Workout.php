@@ -31,7 +31,8 @@ class Workout {
      */
     private $workoutTimesPerWeek;
 
-    public function getWorkoutTime() {
+    public function getWorkoutTime() { //tu szczerze jak i inne podobnoe mogles nazwac po prostu getTime bo jak Ci pisalem, masz juz $workout->getTime()
+        //$workout->getItmesPerWeek(), nie ma sensu powtarzac znowu slowa workout
         return $this->workouttime;
     }
 
