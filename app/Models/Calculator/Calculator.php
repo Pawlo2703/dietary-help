@@ -129,7 +129,7 @@ class Calculator  {
     public function init($data) {
         //tutaj przenioslem cala inicjalizacje tych danych, ktore bedziesz tu uzywal,, co by controlera nie zasmiecac za bardzo
         //zrozumiale? tak, znaczy, myslalem, ze po to jestr kontroler ;d zeby tam takie rzeczy trzymac. teoretycznie tak
-        //ale jak jest mozliwosc to lepiej to przeniesc do modeli i wtedy patrz kontroler
+         //ale jak jest mozliwosc to lepiej to przeniesc do modeli i wtedy patrz kontroler
         $this->person->setAge($data['age']);
         $this->person->setWeight($data['weight']);
         $this->person->setHeight($data['height']); 
@@ -167,9 +167,7 @@ class Calculator  {
         }
 
         $this->tea = $this->teaworkout + $this->teacardio;
-        //w ogole jak on mial zadzialac jak ta metoda nic nie zwraca?
-        // no bo wczesniej wszystko bylo w 1 klasie, samo wtedy mowiels, ze returny nieptorzebne, i wszystko wtedy smigalo
-        //to jak wywaliles return to nie potrzebujesz by ona cos zwarcala. tam chciales ustawic te TDEE czy jakos tak, a tutaj ustawiasz TEA
+       
     }
 
     public function nonExerciseActivityThermogenesis() {

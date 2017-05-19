@@ -29,124 +29,6 @@ class User {
     private $password;
 
     /**
-     *
-     * @var weight
-     */
-    private $weight;
-
-    /**
-     *
-     * @var height
-     */
-    private $height;
-
-    /**
-     *
-     * @var age
-     */
-    private $age;
-
-    /**
-     *
-     * @var state
-     */
-    private $state;
-
-    /**
-     *
-     * @var database
-     */
-    private $database;
-
-        /**
-     *
-     * @var protein
-     */
-    private $protein;
-
-    /**
-     *
-     * @var carbohydrate
-     */
-    private $carbohydrate;
-
-    /**
-     *
-     * @var fat
-     */
-    private $fat;
-
-    /**
-     *
-     * @var calories
-     */
-    private $calories;
-
-    /**
-     * 
-     * @return string
-     */
-    public function getProtein() {
-        return $this->protein;
-    }
-
-    /**
-     * 
-     * @return string
-     */
-    public function getCarbohydrate() {
-        return $this->carbohydrate;
-    }
-
-    /**
-     * 
-     * @return string
-     */
-    public function getFat() {
-        return $this->fat;
-    }
-
-    /**
-     * 
-     * @return string
-     */
-    public function getCalories() {
-        return $this->calories;
-    }
-
-    /**
-     * 
-     * @param string $protein
-     */
-    public function setProtein($protein) {
-        $this->protein = $protein;
-    }
-
-    /**
-     * 
-     * @param string $carbohydrate
-     */
-    public function setCarbohydrate($carbohydrate) {
-        $this->carbohydrate = $carbohydrate;
-    }
-
-    /**
-     * 
-     * @param string $fat
-     */
-    public function setFat($fat) {
-        $this->fat = $fat;
-    }
-
-    /**
-     * 
-     * @param string $state
-     */
-    public function setCalories($calories) {
-        $this->calories = $calories;
-    }
-    
-    /**
      * 
      * @return int
      */
@@ -168,38 +50,6 @@ class User {
      */
     public function getPassword() {
         return $this->password;
-    }
-
-    /**
-     * 
-     * @return string
-     */
-    public function getWeight() {
-        return $this->weight;
-    }
-
-    /**
-     * 
-     * @return string
-     */
-    public function getHeight() {
-        return $this->height;
-    }
-
-    /**
-     * 
-     * @return int
-     */
-    public function getAge() {
-        return $this->age;
-    }
-
-    /**
-     * 
-     * @return string
-     */
-    public function getState() {
-        return $this->state;
     }
 
     /**
@@ -228,43 +78,11 @@ class User {
 
     /**
      * 
-     * @param string $weight
-     */
-    public function setWeight($weight) {
-        $this->weight = $weight;
-    }
-
-    /**
-     * 
-     * @param string $height
-     */
-    public function setHeight($height) {
-        $this->weight = $height;
-    }
-
-    /**
-     * 
-     * @param int $age
-     */
-    public function setAge($age) {
-        $this->weight = $age;
-    }
-
-    /**
-     * 
-     * @param string $state
-     */
-    public function setState($state) {
-        $this->state = $state;
-    }
-
-    /**
-     * 
      * Class constructor
      */
     public function __construct() {
         $this->database = \Tren\Core\Database::getInstance();
-      //  
+        //  
     }
 
     /**
@@ -298,11 +116,6 @@ class User {
             $this->id = $result['id'];
             $this->login = $result['login'];
             $this->password = $result['password'];
-            $this->protein = $result['protein'];
-            $this->fat = $result['fat'];
-            $this->carbohydrate = $result['carbohydrate'];
-            $this->weight = $result['weight'];
-            $this->state = $result['state'];
         }
     }
 
@@ -324,25 +137,15 @@ class User {
     public function save() {
         $login = $this->login;
         $password = $this->password;
-        $protein = $this->protein;
-        $fat = $this->fat;
-        $carbohydrate = $this->carbohydrate;
-        $weight = $this->weight;
-        $state = $this->state;
         $id = $this->id;
 
         if ($this->id == !null) {
             $this->database->updateRow('user', "login='$login', "
                     . "password='$password', "
-                    . "protein='$protein', "
-                    . "fat='$fat', "
-                    . "carbohydrate='$carbohydrate', "
-                    . "weight='$weight', "
-                    . "state='$state' "
                     . "WHERE id = $id");
             return;
         }
-        $this->database->insertRow('user', "(`login`, `password`, `protein`, `fat`, `carbohydrate`, `weight`, `state`) VALUES(?,?,?,?,?,?,?)", [$this->login, $this->password, $this->protein, $this->fat, $this->carbohydrate, $this->weight, $this->state]);
+        $this->database->insertRow('user', "(`login`, `password`) VALUES(?,?)", [$this->login, $this->password]);
     }
 
     /**
@@ -350,59 +153,6 @@ class User {
      */
     public function register() {
         $this->database->insertRow('user', "( `login`, `password`) VALUES(?,?)", [$this->login, $this->password]);
-    }
-
-    /**
-     * Updates user data
-     */
-    public function saveMacros($id) {
-        
-        
-    $this->macronutrient = new Macronutrient();
-    
-    $this->macronutrient->setMacros($id);
-    
-        $protein = $this->protein;
-        $fat = $this->fat;
-        $carbohydrate = $this->carbohydrate;
-        $calories = $this->calories;
-
-        $this->database->updateRow('user', "protein='$protein', "
-                . "fat='$fat', "
-                . "carbohydrate='$carbohydrate', "
-                . "calories='$calories'"
-                . "WHERE id = $id");
-        return;
-    }
-
-    /*
-     * Updates user data
-     */
-
-    public function saveDetails($id) {
-
-        $weight = $this->weight;
-        $state = $this->state;
-
-
-
-        if ($id == !null) {
-            $this->database->updateRow('user', "weight='$weight', "
-                    . "state='$state' "
-                    . "WHERE id = $id");
-            return;
-        }
-    }
-
-    public function calculateCalories() {
-        $protein = $this->protein;
-        $fat = $this->fat;
-        $carbohydrate = $this->carbohydrate;
-        $calories = $this->calories;
-
-        $calories = ($protein + $carbohydrate) * 4 + $fat * 9;
-        print_r($calories);
-        return $calories;
     }
 
 }

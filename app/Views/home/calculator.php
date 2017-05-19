@@ -11,7 +11,7 @@ include('headfoot/header.php')
 
 <div class="reg">
     <h1>Calculate your macro intake</h1>
-    <form method="post" action="http://localhost/Tren/public/calc/saveMacros">
+    <form method="post" action="http://localhost/Tren/public/calc/setMacros">
         <label><b>Age:</b></label> <input autocomplete="off" name="age" type="text" placeholder="Age">
         <label><b>Weight:</b></label> <input autocomplete="off" name="weight" type="text" placeholder="Weight">
         <label><b>Height:</b></label> <input autocomplete="off" name="height" type="text" placeholder="Height">

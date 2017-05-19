@@ -5,31 +5,31 @@ Hello, <?= $data['user']->getLogin() ?>
     <div class="row">
         
         <figure class="col-sm-2">    
-            <p>Protein:<?= $data['user']->getProtein() ?></a></p>
+            <p>Protein:<?= $data['macro']->getProtein() ?></a></p>
 
         </figure>
         <figure class="col-sm-2">
-            <p>Fat:<?= $data['user']->getFat() ?></a></p>
+            <p>Fat:<?= $data['macro']->getFat() ?></a></p>
 
         </figure>
         <figure class="col-sm-2">
-            <p>Carbohydrate:<?= $data['user']->getCarbohydrate() ?></a></p>
+            <p>Carbohydrate:<?= $data['macro']->getCarbohydrate() ?></a></p>
 
         </figure>
         <figure class="col-sm-2">
-            <p>Weight:<?= $data['user']->getWeight() ?></a></p>
+            <p></a></p>
 
         </figure>
         
         <figure class="col-sm-2">
-            <p>Goal:<?= $data['user']->getState() ?></a></p>
+            <p></a></p>
 
         </figure>
 
-        
-<?php if (!$data['user']->getState()): 
+  <!--      
+<?php //if (!$data['user']->()): 
     ?>
         <a href="http://localhost/Tren/public/Macros/userTwo">Give us the rest of necessery details.</a>
-<?php endif; ?>
-
+<?php //endif; ?>
+!-->
 </section>

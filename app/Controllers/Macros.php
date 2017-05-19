@@ -5,6 +5,7 @@ namespace Tren\Controllers;
 use Tren\Core\Controller;
 use Tren\Models\User;
 use Tren\Models\User\Macronutrient;
+use Tren\Models\User\PersonalData;
 
 /**
  * Class Macros
@@ -22,21 +23,17 @@ class Macros extends Controller {
     /**
      * Saves user data
      */
-    public function saveMacros() {
+    public function setMacros() {
         $this->session->loginCheck();
         $params = $this->getParameters();
-    
         
-        $user = new User();
-                
+        $user = new Macronutrient();
+        
         $id = ($this->session->get('zmienna2'));
-        
-        
         $user->setProtein($params['protein']);
         $user->setFat($params['fat']);
         $user->setCarbohydrate($params['carbs']);
-
-        $user->saveMacros($id);
+        $user->setMacros($id);
 
         header("Location: http://localhost/Tren/public/Macros/userTwo");
     }
@@ -54,13 +51,20 @@ class Macros extends Controller {
      */
     public function saveDetails() {
         $this->session->loginCheck();
-        $user = new User();
+        $params = $this->getParameters();
+        
+        $personalData = new PersonalData();
+       //dodac wyswetlanie personal data
+
         $id = ($this->session->get('zmienna2'));
+        var_dump($params);
+        $personalData->setWeight($params['weight']);
+        $personalData->setHeight($params['height']);
+        $personalData->setState($params['state']);
+        
 
-        $user->setWeight($this->getParam('weight'));
-        $user->setState($this->getParam('state'));
 
-        $user->saveDetails($id);
+        $personalData->personalData($id);
 
         header("Location: http://localhost/Tren/public/UserDetails/display");
     }

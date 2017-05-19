@@ -27,7 +27,7 @@ class Log extends Controller {
         $user = new User();
         $userId = $user->findByLogin($this->getParam('login'));
 
-        if (!$userId) {           
+        if (!$userId) {
             $this->view('home/login');
             return;
         }
@@ -42,17 +42,8 @@ class Log extends Controller {
             $this->session->set('zmienna', $user->getLogin());
             $this->session->set('zmienna2', $user->getId());
 
-            $protein = $user->getProtein();
 
-            if ($protein == null) {
-                $this->view('home/macros');
-            } else {
-
-
-                $this->view('home/login');
-            }
-        } else {
-            $this->view('home/login');
+            $this->view('home/macros');
         }
     }
 

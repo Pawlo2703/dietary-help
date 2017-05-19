@@ -4,7 +4,7 @@ namespace Tren\Controllers;
 
 use Tren\Core\Controller;
 use Tren\Models\User;
-use Tren\Core\Database;
+use Tren\Models\User\Macronutrient;
 
 /*
  * Class UserDetails
@@ -15,16 +15,19 @@ class UserDetails extends Controller {
      * Displays logged users data
      */
 
-    public function display($login = '') {
+    public function display() {
         $user = new User();
-
+        $macro = new Macronutrient();
+        $personalData = new PersonalData();
+        
         $this->session->loginCheck();
         $id = ($this->session->get('zmienna2'));
-        var_dump($id);
+
         $user->load($id);
+        $macro->loadMacros($id);
         $data = [
-            'user' => $user->getLogin(),
-            'user' => $user
+            'user' => $user,
+            'macro' => $macro
         ];
         $this->view('home/index', $data);
     }

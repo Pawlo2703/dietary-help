@@ -13,6 +13,7 @@ include('headfoot/header.php')
     
     <form method="post" action="http://localhost/Tren/public/Macros/saveDetails">
        <p>Current Weight:</p><input autocomplete="off" name="weight" type="text" placeholder="weight">
+       <p>Current Height:</p><input autocomplete="off" name="height" type="text" placeholder="height">
       <p>Your goal:</p><select name="state">
   <option >Bulking</option>
   <option >Cutting</option>

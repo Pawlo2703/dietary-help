@@ -5,10 +5,8 @@ namespace Tren\Controllers;
 use Tren\Core\Controller;
 use Tren\Models\User;
 use Tren\Models\Calculator\Calculator;
-use Tren\Models\Calculator\Activities;
-use Tren\Models\Calculator\Activities\Person;
-use Tren\Models\Calculator\Activities\Cardio;
-use Tren\Models\Calculator\Activities\Workout;
+use Tren\Models\User\Macronutrient;
+
 
 /**
  * Class Calc
@@ -26,17 +24,19 @@ class Calc extends Controller {
     /**
      * 
      */
-    public function saveMacros() {
+    public function setMacros() {
         $this->session->loginCheck();
         $params = $this->getParameters();
         $calc = new Calculator();
         $calc->init($params);
         $calc->totaldailyEnergyExpenditure();
 
-        $user = new User();
-        $result = $user->setCalories($calc->getTdee());
+        $user = new Macronutrient();
+        
         $id = ($this->session->get('zmienna2'));
-        $user->saveMacros($id);
+        $user->setCalories($calc->getTdee());
+        
+        $user->setMacros($id);
     }
 
     /**
