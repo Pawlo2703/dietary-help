@@ -81,8 +81,22 @@ class Database extends Controller {
      * Selects database row
      */
 
-    public function getRow($table, $condition = "", $params = []) {
-        $query = "SELECT * FROM $table ";
+        public function getRoww($column, $table, $table2, $condition = "", $params = []) {
+        $query = "SELECT $column FROM $table JOIN $table2 ON ";
+        if ($condition) {
+            $query .= $condition;
+        }
+        try {
+            $stmt = $this->connection->prepare($query);
+            $stmt->execute($params);
+            return $stmt->fetch();
+        } catch (PDOException $e) {
+            throw new Exception($e->getMessage());
+        }
+    }
+    
+    public function getRow($column, $table, $condition = "", $params = []) {
+        $query = "SELECT $column FROM $table ";
         if ($condition) {
             $query .= $condition;
         }

@@ -5,7 +5,7 @@ namespace Tren\Controllers;
 use Tren\Core\Controller;
 use Tren\Models\User;
 use Tren\Models\User\Macronutrient;
-use Tren\Models\User\PersonalData;
+use Tren\Models\Calculator\Activities\Person;
 
 /**
  * Class Macros
@@ -27,13 +27,16 @@ class Macros extends Controller {
         $this->session->loginCheck();
         $params = $this->getParameters();
 
-        $user = new Macronutrient();
+        $macro = new Macronutrient();
+        $person = new Person();
 
         $id = ($this->session->get('zmienna2'));
-        $user->setProtein($params['protein']);
-        $user->setFat($params['fat']);
-        $user->setCarbohydrate($params['carbs']);
-        $user->setMacros($id);
+        $macro->setProtein($params['protein']);
+        $macro->setFat($params['fat']);
+        $macro->setCarbohydrate($params['carbs']);
+        $person->init($params);
+        $person->personalData($id);
+        $macro->setMacros($id);
 
         header("Location: http://localhost/Tren/public/Macros/userTwo");
     }

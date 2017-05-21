@@ -27,6 +27,7 @@ class User {
      * @var password
      */
     private $password;
+    
 
     /**
      * 
@@ -110,7 +111,7 @@ class User {
      * @param int $id
      */
     public function load($id) {
-        $result = $this->database->getRow('user', "WHERE id = ?", [$id]);
+        $result = $this->database->getRow('*','user', "WHERE id = ?", [$id]);
 
         if (!empty($result)) {
             $this->id = $result['id'];

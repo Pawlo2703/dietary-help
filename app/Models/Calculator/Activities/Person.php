@@ -44,6 +44,11 @@ class Person { //czemu rozszerzales o calc?  person nie ma raczej duzego zwizku 
     private $gender;
     private $state;
     private $id;
+    private $date;
+
+    public function getDate() {
+        return $this->date;
+    }
 
     public function getId() {
         return $this->id;
@@ -93,6 +98,10 @@ class Person { //czemu rozszerzales o calc?  person nie ma raczej duzego zwizku 
         $this->state = $state;
     }
 
+    public function setDate($date) {
+        $this->date = $date;
+    }
+
     public function __construct() {
         $this->database = \Tren\Core\Database::getInstance();
     }
@@ -132,14 +141,37 @@ class Person { //czemu rozszerzales o calc?  person nie ma raczej duzego zwizku 
         $this->database->insertRow('person', "(`id`, `weight`,`height`, `state`) VALUES(?,?,?,?)", [$id, $this->weight, $this->height, $this->state]);
     }
 
+    //SELECT name, surname, weight FROM user JOIN weight ON user.id = weight.user_id WHERE user.id = 1;
     public function loadPersonalData($id) {
-        $result = $this->database->getRow('person', "WHERE id = ?", [$id]);
+        $result = $this->database->getRoww('*','person','weight', "person.id = weight.user_id WHERE person.id = ?", [$id]);
+
         if (!empty($result)) {
             $this->id = $result['id'];
             $this->weight = $result['weight'];
             $this->height = $result['height'];
             $this->state = $result['state'];
+            $this->date = $result['date'];
+        }
+        
+//        $result2 = $this->database->getRow('date','weight', "WHERE user_id = ? AND date = ?", [$id,$this->date]);
+//        if (!empty($result2)) {
+//            $this->date = $result2['date'];
+//        }
+    }
+
+    public function updateDailyWeight($id) {
+        $result = $this->database->getRow('*','weight', "WHERE user_id = ? AND date = ?", [$id, $this->date]);
+        if (isset($result['date'])) {
+         
+            header("Location: http://localhost/Tren/public/UserDetails/display");
+            
+            
+        } else {
+            $this->database->insertRow('weight', "(`user_id`, `weight`, `date`) VALUES(?,?,?)", [$id, $this->weight, $this->date]);
+            header("Location: http://localhost/Tren/public/UserDetails/display");
         }
     }
 
+ 
+    
 }

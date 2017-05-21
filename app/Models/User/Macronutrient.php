@@ -90,7 +90,7 @@ class Macronutrient {
     }
 
     public function loadMacros($id) {
-        $result = $this->database->getRow('macro', "WHERE id = ?", [$id]);
+        $result = $this->database->getRow('*','macro', "WHERE id = ?", [$id]);
 
         if (!empty($result)) {
             $this->id = $result['id'];

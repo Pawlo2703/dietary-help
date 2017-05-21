@@ -1,11 +1,11 @@
  <header class="container">
         <div class="row">
-            <h1 class="col-sm-4"><Random Blog</a></h1>
+            <p class="col-sm-3"></p>
             <nav class="col-sm-8 text-right">
                 <p><a href="http://localhost/Tren/public/UserDetails/display">Home</a></p>
-                <p><a href="http://localhost/Tren/public/log/login">Zaloguj się</p>
-                <p><a href="http://localhost/Tren/public/register/user">Rejestracja</p>
-                <p><a href="http://localhost/Tren/public/log/logout">Wyloguj</p>
+                <p><a href="http://localhost/Tren/public/log/login">Log in</p>
+                <p><a href="http://localhost/Tren/public/register/user">Register</p>
+                <p><a href="http://localhost/Tren/public/log/logout">Log out</p>
             </nav>
         </div>
     </header>

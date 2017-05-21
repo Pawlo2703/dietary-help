@@ -32,7 +32,7 @@ class Register extends Controller {
 
 
         $add->register();
-        $this->view('home/register');
+        $this->view('home/login');
     }
 
 }
