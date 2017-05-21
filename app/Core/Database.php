@@ -3,6 +3,7 @@
 namespace Tren\Core;
 
 use PDO;
+
 /**
  * Class Database
  */
@@ -16,10 +17,10 @@ class Database extends Controller {
     private $options;
     private static $instance;
 
-/**
- * 
- * @return Database
- */
+    /**
+     * 
+     * @return Database
+     */
     public static function getInstance() {
         if (self::$instance === null) {
             self::$instance = new Database();
@@ -67,9 +68,11 @@ class Database extends Controller {
             throw new Exception($e->getMessage());
         }
     }
+
     /*
      * Disconnects with database
      */
+
     public function disconnect() {
         $this->connection = NULL;
     }
@@ -77,6 +80,7 @@ class Database extends Controller {
     /*
      * Selects database row
      */
+
     public function getRow($table, $condition = "", $params = []) {
         $query = "SELECT * FROM $table ";
         if ($condition) {
@@ -94,6 +98,7 @@ class Database extends Controller {
     /*
      * Creates new database row
      */
+
     public function insertRow($table, $condition = "", $params = []) {
         $query = "INSERT INTO $table ";
         if ($condition) {
@@ -111,6 +116,7 @@ class Database extends Controller {
     /*
      * Updates existing database row
      */
+
     public function updateRow($table, $condition = "", $params = []) {
         $query = "UPDATE $table SET ";
         if ($condition) {
@@ -128,6 +134,7 @@ class Database extends Controller {
     /*
      * Deletes database row
      */
+
     public function deleteRow($table, $condition = "", $params = []) {
         $query = "DELETE FROM $table ";
         if ($condition) {

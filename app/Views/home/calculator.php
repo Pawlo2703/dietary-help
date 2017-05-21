@@ -1,3 +1,17 @@
+<script language="JavaScript">
+ 
+var DivTxt = new Array()
+DivTxt[0] = ""
+DivTxt[1] = "Gaining weight faster, which maximalizes muscle gain"
+DivTxt[2] = "Gaining weight slowly, with fat gain minimalized"
+DivTxt[3] = "Shorten fat loss phase with a greater deficit that lasts from 4 to 8 weeks"
+DivTxt[4] = "Long term fat loss phase that lasts from 8 to 16 weeks"
+ 
+function getText(slction){
+txtSelected = slction.selectedIndex;
+document.getElementById('textDiv').innerHTML = DivTxt[txtSelected];
+}
+</script>
 <!-- header !-->
 <?php
 include('headfoot/header.php')
@@ -37,7 +51,14 @@ include('headfoot/header.php')
   <option >Setendary</option>
   <option >Moderate</option>
   <option >Intense</option></select>
-  
+  <p>Your goal:</p><select class="body_text" onchange="getText(this)" name="state">
+                <option>Choose one..</option>
+                <option>Regular bulk</option>
+                <option>Lean bulk</option>
+                <option>Mini cut</option>
+                <option>Long term cut</option>
+  </select></br>
+  <div id="textDiv"> </div>
 
         <button type="submit" >Submit</button>
     </form>

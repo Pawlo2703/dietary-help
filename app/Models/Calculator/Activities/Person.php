@@ -3,6 +3,7 @@
 namespace Tren\Models\Calculator\Activities;
 
 use Tren\Models\Calculator\Calculator;
+
 /**
  * Class Person
  */
@@ -11,6 +12,7 @@ class Person { //czemu rozszerzales o calc?  person nie ma raczej duzego zwizku 
     /**
      * Basic Metabolism Rate multiplers
      */
+
     const WEIGHTMULTIPLER = 9.99;
     const HEIGHTMULTIPLER = 6.25;
     const AGEMULTIPLER = 4.92;
@@ -27,19 +29,29 @@ class Person { //czemu rozszerzales o calc?  person nie ma raczej duzego zwizku 
      *
      * @var weight
      */
-    private $weight = 0;
+    private $weight;
 
     /**
      *
      * @var height
      */
-    private $height = 0;
+    private $height;
 
     /**
      *
      * @var gender
      */
     private $gender;
+    private $state;
+    private $id;
+
+    public function getId() {
+        return $this->id;
+    }
+
+    public function setId($id) {
+        $this->id = $id;
+    }
 
     public function getAge() {
         return $this->age;
@@ -55,6 +67,10 @@ class Person { //czemu rozszerzales o calc?  person nie ma raczej duzego zwizku 
 
     public function getGender() {
         return $this->gender;
+    }
+
+    public function getState() {
+        return $this->state;
     }
 
     public function setAge($age) {
@@ -73,10 +89,23 @@ class Person { //czemu rozszerzales o calc?  person nie ma raczej duzego zwizku 
         $this->gender = $gender;
     }
 
-        /**
+    public function setState($state) {
+        $this->state = $state;
+    }
+
+    public function __construct() {
+        $this->database = \Tren\Core\Database::getInstance();
+    }
+
+    public function init($data) {
+        $this->setWeight($data['weight']);
+        $this->setHeight($data['height']);
+        $this->setState($data['state']);
+    }
+
+    /**
      * Calculates Basic Metabolism Rates
      */
-    
     public function getBasicMetabolismRate() {
         //tej zmiennej $person tu nie ma zadeklarowanej????
         // znaczy dalem ja private $person tylko
@@ -87,16 +116,30 @@ class Person { //czemu rozszerzales o calc?  person nie ma raczej duzego zwizku 
         //no i nie mozesz robic [$this->gender == 'Male'] tak, bo  [] to odowolanie sie do tablicy, a to co dales w srodku to warunek jest, ze jezeli $this->gender == 'Male' to zwroci true
         //zgaduje ze $person ma byc obiektem tej klasy co zrobiles
         if ($this->gender == 'Male') {
-            return (self::WEIGHTMULTIPLER * $this->weight) + 
+            return (self::WEIGHTMULTIPLER * $this->weight) +
                     (self::HEIGHTMULTIPLER * $this->height) - (self::AGEMULTIPLER * $this->age) + self::MALEDIFFERENCE;
         }
         //to co masz tutaj wyzej, zawsze zostanie nadpisane przez ten kod tutaj nizej, znaczy, jak dam return to wtedy bedzie ok tak? tak
-        return (self::WEIGHTMULTIPLER * $this->weight) + 
-                (self::HEIGHTMULTIPLER * $this->height) - (self::AGEMULTIPLER * $this->age)
-                + self::FEMALEDIFFERENCE; //tzn teoretycznie mozesz uzyc $this->person::CONSTANT ale lepiej odwolac sie do nazwy klasy
+        return (self::WEIGHTMULTIPLER * $this->weight) +
+                (self::HEIGHTMULTIPLER * $this->height) - (self::AGEMULTIPLER * $this->age) + self::FEMALEDIFFERENCE; //tzn teoretycznie mozesz uzyc $this->person::CONSTANT ale lepiej odwolac sie do nazwy klasy
         //self uzywasz jak jestes wewnatrz klasy w ktorej masz constanty, tak jest sir , to wiem :D
         //wiesz co w ogole mysle ze fajnie by bylo BMR przeniesc do Person, bo tylko do osoby sie to odnosci prawda? wiec nie mas ensu liczyc tego tutaj, tylko mozna
         //dac w $this->person->getBasicMetabolismRate() i zwrocic juz odpowiedni wynik, co Ty na to? xD faza, to wtedy, trzebaby bylo dac do activities.
         //nie wiem co to te cardio ale jezeli widzisz to sensowniej tam, to mysle ze tak. ja tutaj na przykladzie bmr CI przeniose
     }
+
+    public function personalData($id) {
+        $this->database->insertRow('person', "(`id`, `weight`,`height`, `state`) VALUES(?,?,?,?)", [$id, $this->weight, $this->height, $this->state]);
+    }
+
+    public function loadPersonalData($id) {
+        $result = $this->database->getRow('person', "WHERE id = ?", [$id]);
+        if (!empty($result)) {
+            $this->id = $result['id'];
+            $this->weight = $result['weight'];
+            $this->height = $result['height'];
+            $this->state = $result['state'];
+        }
+    }
+
 }

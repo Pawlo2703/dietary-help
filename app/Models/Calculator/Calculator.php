@@ -6,13 +6,18 @@ use Tren\Models\Calculator\Activities;
 use Tren\Models\Calculator\Activities\Person;
 use Tren\Models\Calculator\Activities\Cardio;
 use Tren\Models\Calculator\Activities\Workout;
+
 /**
  * Class Calculator
  */
-class Calculator  {
-
+class Calculator {
     /* Thermic effect of food */
+
     const TEF = 0.1;
+    const REGULAR_BULK = 1.15;
+    const LEAN_BULK = 1.075;
+    const MINI_CUT = 0.75;
+    const LONG_TERM_CUT = 0.85;
 
     /**
      *
@@ -49,15 +54,11 @@ class Calculator  {
      * @var teaworkout
      */
     private $teaworkout;
-    
     private $person;
-
     private $activities;
-    
     private $cardio;
-    
     private $workout;
-    
+
     public function getBmr() {
         return $this->bmr;
     }
@@ -113,38 +114,36 @@ class Calculator  {
     public function setTdee($tdee) {
         $this->tdee = $tdee;
     }
-    
+
     public function __construct() {
-         if ($this->database = \Tren\Core\Database::getInstance()) {
-        $this->person = new Person();
-        $this->activities = new Activities();
-        $this->cardio = new Cardio();
-        $this->workout = new Workout();
-         }
+        if ($this->database = \Tren\Core\Database::getInstance()) {
+            $this->person = new Person();
+            $this->activities = new Activities();
+            $this->cardio = new Cardio();
+            $this->workout = new Workout();
+        }
     }
-    
+
     /**
      * Initialize all required objects data
      * @param type $data
      */
     public function init($data) {
-        //tutaj przenioslem cala inicjalizacje tych danych, ktore bedziesz tu uzywal,, co by controlera nie zasmiecac za bardzo
-        //zrozumiale? tak, znaczy, myslalem, ze po to jestr kontroler ;d zeby tam takie rzeczy trzymac. teoretycznie tak
-         //ale jak jest mozliwosc to lepiej to przeniesc do modeli i wtedy patrz kontroler
         $this->person->setAge($data['age']);
         $this->person->setWeight($data['weight']);
-        $this->person->setHeight($data['height']); 
+        $this->person->setHeight($data['height']);
         $this->person->setGender($data['gender']);
+        $this->person->setState($data['state']);
         //nie poprawiaj recznie :D ctrl+r poprawia wszystkie wystapienia,o najs :D
         $this->activities->setCardio($data['cardio']);
         $this->activities->setActivity($data['activity']);
         $this->activities->setWorkout($data['workout']);
-                
+
         $this->cardio->setCardioTimesPerWeek($data['cardiotimesperweek']);
         $this->cardio->setCardioTime($data['cardiotime']);
-        
+
         $this->workout->setWorkoutTime($data['workouttime']);
-        $this->workout->setWorkoutTimesPerWeek($data['workouttimesperweek']);    
+        $this->workout->setWorkoutTimesPerWeek($data['workouttimesperweek']);
     }
 
     public function totalExpenditureActivity() {
@@ -164,11 +163,10 @@ class Calculator  {
         } else if ($this->activities->getWorkout() == 'Moderate') {
             $this->teaworkout = (Workout::MODERATEWORKOUT * $this->workout->getWorkoutTime() + Workout::MODERATEWORKOUTEPOC * $this->bmr) * $this->workout->getWorkoutTimesPerWeek();
         } else if ($this->activities->getWorkout() == 'Intense') {
-            $this->teaworkout = (Workout::INTENSEWORKOUT *$this->workout->getWorkoutTime() + Workout::MODERATEWORKOUTEPOC * $this->bmr) * $this->workout->getWorkoutTimesPerWeek();
+            $this->teaworkout = (Workout::INTENSEWORKOUT * $this->workout->getWorkoutTime() + Workout::MODERATEWORKOUTEPOC * $this->bmr) * $this->workout->getWorkoutTimesPerWeek();
         }
 
         $this->tea = $this->teaworkout + $this->teacardio;
-       
     }
 
     public function nonExerciseActivityThermogenesis() {
@@ -178,7 +176,7 @@ class Calculator  {
         } else if ($this->activities->getActivity() == 'Moderate') {
             $this->neat = (Activities::MODERATEACTIVITY);
         } else if ($this->activities->getActivity() == 'Intense') {
-            $this->neat = (Activities::INTENSEACTIVITY ); 
+            $this->neat = (Activities::INTENSEACTIVITY );
         }
     }
 
@@ -192,9 +190,17 @@ class Calculator  {
     public function totalDailyEnergyExpenditure() {
         $this->thermicEffectOfFood();
 
-        $this->tdee = $this->person->getBasicMetabolismRate() + ($this->tea / 7) + $this->neat + $this->tef;
+        if ($this->person->getState() == 'Regular bulk') {
+            $this->tdee = ($this->person->getBasicMetabolismRate() + ($this->tea / 7) + $this->neat + $this->tef)*self::REGULAR_BULK;
+        } else if ($this->person->getState() == 'Lean bulk') {
+            $this->tdee = ($this->person->getBasicMetabolismRate() + ($this->tea / 7) + $this->neat + $this->tef)*self::LEAN_BULK;
+        } else if ($this->person->getState() == 'Mini cut') {
+            $this->tdee = ($this->person->getBasicMetabolismRate() + ($this->tea / 7) + $this->neat + $this->tef)*self::MINI_CUT;
+        } else if ($this->person->getState() == 'Long term cut') {
+            $this->tdee = ($this->person->getBasicMetabolismRate() + ($this->tea / 7) + $this->neat + $this->tef)*self::LONG_TERM_CUT;
+        }
         var_dump($this->tdee);
         return $this->tdee;
-            }
+    }
 
 }

@@ -26,9 +26,9 @@ class Macros extends Controller {
     public function setMacros() {
         $this->session->loginCheck();
         $params = $this->getParameters();
-        
+
         $user = new Macronutrient();
-        
+
         $id = ($this->session->get('zmienna2'));
         $user->setProtein($params['protein']);
         $user->setFat($params['fat']);
@@ -36,38 +36,6 @@ class Macros extends Controller {
         $user->setMacros($id);
 
         header("Location: http://localhost/Tren/public/Macros/userTwo");
-    }
-
-    /**
-     * Displays form
-     */
-    public function userTwo() {
-        $this->session->loginCheck();
-        $this->view('home/details');
-    }
-
-    /**
-     * Saves user data
-     */
-    public function saveDetails() {
-        $this->session->loginCheck();
-        $params = $this->getParameters();
-        
-        $personalData = new PersonalData();
-        $macro = new Macronutrient();
-        
-        $id = ($this->session->get('zmienna2'));
-        var_dump($params);
-        $personalData->setWeight($params['weight']);
-        $personalData->setHeight($params['height']);
-        $personalData->setState($params['state']);
-        
-
-
-        $personalData->personalData($id);
-        $personalData->setState($params['state']);
-        $macro -> setGoalMacro($id);
-        header("Location: http://localhost/Tren/public/UserDetails/display");
     }
 
 }
