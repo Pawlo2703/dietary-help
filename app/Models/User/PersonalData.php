@@ -63,6 +63,7 @@ class PersonalData {
     public function getHeight() {
         return $this->height;
     }
+
     /**
      * 
      * @return string
@@ -95,7 +96,6 @@ class PersonalData {
         $this->height = $height;
     }
 
-
     /**
      * 
      * @param string $state
@@ -103,18 +103,29 @@ class PersonalData {
     public function setState($state) {
         $this->state = $state;
     }
-    
-     /**
+
+    /**
      * 
      * Class constructor
      */
     public function __construct() {
         $this->database = \Tren\Core\Database::getInstance();
-      //  
+        //  
     }
-    
+
     public function personalData($id) {
-    $this->database->insertRow('person', "(`id`, `weight`,`height`, `state`) VALUES(?,?,?,?)", [$id, $this->weight, $this->height, $this->state]);
-       
+                $this->database->insertRow('person', "(`id`, `weight`,`height`, `state`) VALUES(?,?,?,?)", [$id, $this->weight, $this->height, $this->state]);
     }
+
+    public function loadPersonalData($id) {
+        $result = $this->database->getRow('person', "WHERE id = ?", [$id]);
+
+        if (!empty($result)) {
+            $this->id = $result['id'];
+            $this->weight = $result['weight'];
+            $this->height = $result['height'];
+            $this->state = $result['state'];
+        }
+    }
+
 }

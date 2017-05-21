@@ -54,8 +54,8 @@ class Macros extends Controller {
         $params = $this->getParameters();
         
         $personalData = new PersonalData();
-       //dodac wyswetlanie personal data
-
+        $macro = new Macronutrient();
+        
         $id = ($this->session->get('zmienna2'));
         var_dump($params);
         $personalData->setWeight($params['weight']);
@@ -65,7 +65,8 @@ class Macros extends Controller {
 
 
         $personalData->personalData($id);
-
+        $personalData->setState($params['state']);
+        $macro -> setGoalMacro($id);
         header("Location: http://localhost/Tren/public/UserDetails/display");
     }
 

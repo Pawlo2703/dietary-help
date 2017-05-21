@@ -115,11 +115,12 @@ class Calculator  {
     }
     
     public function __construct() {
-        
+         if ($this->database = \Tren\Core\Database::getInstance()) {
         $this->person = new Person();
         $this->activities = new Activities();
         $this->cardio = new Cardio();
         $this->workout = new Workout();
+         }
     }
     
     /**

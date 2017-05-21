@@ -4,7 +4,8 @@ Hello, <?= $data['user']->getLogin() ?>
     
     <div class="row">
         
-        <figure class="col-sm-2">    
+   <?php if ($data['personalData']->getState()): 
+    ?>     <figure class="col-sm-2">    
             <p>Protein:<?= $data['macro']->getProtein() ?></a></p>
 
         </figure>
@@ -23,13 +24,13 @@ Hello, <?= $data['user']->getLogin() ?>
         
         <figure class="col-sm-2">
             <p></a></p>
-
+<?php endif; ?>
         </figure>
 
-  <!--      
-<?php //if (!$data['user']->()): 
+      
+<?php if (!$data['personalData']->getState()): 
     ?>
-        <a href="http://localhost/Tren/public/Macros/userTwo">Give us the rest of necessery details.</a>
-<?php //endif; ?>
-!-->
+        <a href="http://localhost/Tren/public/Macros/userTwo">Give us the rest of necessery details to calculate your macros and calories.</a>
+<?php endif; ?>
+
 </section>
