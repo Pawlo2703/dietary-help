@@ -1,26 +1,11 @@
-<!-- header !-->
 <?php
-include('headfoot/header.php')
-?>
 
-<body>
-    <!-- menu & img !-->
-    <?php
-    include('headfoot/menu.php')
-    ?>
+require_once '../app/init.php';
 
 
-    <?php
-    echo "sup";
-    ?>
+$session = new \Mvc\libs\Session();
+$session->start();
 
-    <!-- footer !-->
-    <?php
-    include('headfoot/footer.php')
-    ?>
-
-  
-</body>
-</html>
+$app = new \Mvc\Core\App();
 
 

@@ -19,7 +19,7 @@
             </tr>
             <tr>
                 <td>Fat:<?= $data['macro']->getFat() ?></td>
-                <td>Weight: Avarge weight from last week</td>
+                <td>Last weeks avarge weight:<?= $data['weight']->getAvgWeightLW() ?></td>
             </tr>
             <tr>
                 <td>Carbohydrate:<?= $data['macro']->getCarbohydrate() ?></td>
@@ -29,7 +29,9 @@
     </table>
 
 
-    <?php if (!$data['person']->getDate()):
+    <?php 
+    $today = date("Y-m-d");
+            if (($data['person']->getDate()) < $today):
         ?>
         <div class="reg">
             <form method="post" action="http://localhost/Tren/public/weight/saveWeight">

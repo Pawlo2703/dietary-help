@@ -143,7 +143,8 @@ class Person { //czemu rozszerzales o calc?  person nie ma raczej duzego zwizku 
 
     //SELECT name, surname, weight FROM user JOIN weight ON user.id = weight.user_id WHERE user.id = 1;
     public function loadPersonalData($id) {
-        $result = $this->database->getRoww('*','person','weight', "person.id = weight.user_id WHERE person.id = ?", [$id]);
+
+    $result = $this->database->join('weight.user_id, weight.weight, (SELECT weight.date from weight where weight.user_id=? ORDER by weight.date DESC limit 1) as date, weight.id, person.height, person.weight, person.state','weight','person', "person.id = weight.user_id WHERE person.id = ?  ", [$id, $id]);
 
         if (!empty($result)) {
             $this->id = $result['id'];
@@ -151,14 +152,11 @@ class Person { //czemu rozszerzales o calc?  person nie ma raczej duzego zwizku 
             $this->height = $result['height'];
             $this->state = $result['state'];
             $this->date = $result['date'];
+          
         }
-        
-//        $result2 = $this->database->getRow('date','weight', "WHERE user_id = ? AND date = ?", [$id,$this->date]);
-//        if (!empty($result2)) {
-//            $this->date = $result2['date'];
-//        }
+       
     }
-
+    
     public function updateDailyWeight($id) {
         $result = $this->database->getRow('*','weight', "WHERE user_id = ? AND date = ?", [$id, $this->date]);
         if (isset($result['date'])) {

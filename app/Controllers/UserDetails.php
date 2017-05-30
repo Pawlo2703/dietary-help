@@ -20,19 +20,23 @@ class UserDetails extends Controller {
         $user = new User();
         $macro = new Macronutrient();
         $person = new Person();
+        $weight = new User\DailyWeight();
+        
         $this->session->loginCheck();
         $id = ($this->session->get('zmienna2'));
 
         $user->load($id);
         $macro->loadMacros($id);
         $person->loadPersonalData($id);
+        $weight->getSevenWeightsLastWeek($id);
         
    //     $person->loadDate($id);
         
         $data = [
             'user' => $user,
             'macro' => $macro,
-            'person' => $person
+            'person' => $person,
+                'weight' => $weight
         ];
        $this->view('home/index', $data);
        

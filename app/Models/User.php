@@ -92,7 +92,7 @@ class User {
      * @return int
      */
     public function findByLogin($login) {
-        $result = $this->database->getRow('user', "WHERE login = ?", [$login]);
+        $result = $this->database->getRow('*','user', "WHERE login = ?", [$login]);
         return isset($result['id']) ? $result['id'] : 0;
     }
 
@@ -102,7 +102,7 @@ class User {
      * @return string
      */
     public function checkPassword($id) {
-        $result = $this->database->getRow('user', "WHERE id = ?", [$id]);
+        $result = $this->database->getRow('*','user', "WHERE id = ?", [$id]);
         return isset($result['password']) ? $result['password'] : 0;
     }
 

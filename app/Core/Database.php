@@ -81,7 +81,7 @@ class Database extends Controller {
      * Selects database row
      */
 
-        public function getRoww($column, $table, $table2, $condition = "", $params = []) {
+        public function join($column, $table, $table2, $condition = "", $params = []) {
         $query = "SELECT $column FROM $table JOIN $table2 ON ";
         if ($condition) {
             $query .= $condition;
@@ -104,6 +104,20 @@ class Database extends Controller {
             $stmt = $this->connection->prepare($query);
             $stmt->execute($params);
             return $stmt->fetch();
+        } catch (PDOException $e) {
+            throw new Exception($e->getMessage());
+        }
+    }
+    
+        public function getRows($column, $table, $condition = "", $params = []) {
+        $query = "SELECT $column FROM $table ";
+        if ($condition) {
+            $query .= $condition;
+        }
+        try {
+            $stmt = $this->connection->prepare($query);
+            $stmt->execute($params);
+            return $stmt->fetchAll();
         } catch (PDOException $e) {
             throw new Exception($e->getMessage());
         }
