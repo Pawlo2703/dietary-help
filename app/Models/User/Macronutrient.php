@@ -19,6 +19,23 @@ class Macronutrient {
     private $fat;
     private $calories;
     private $database;
+    private $mealPref;
+
+    public function getDatabase() {
+        return $this->database;
+    }
+
+    public function getMealPref() {
+        return $this->mealPref;
+    }
+
+    public function setDatabase($database) {
+        $this->database = $database;
+    }
+
+    public function setMealPref($mealPref) {
+        $this->mealPref = $mealPref;
+    }
 
     public function getId() {
         return $this->id;
@@ -75,8 +92,8 @@ class Macronutrient {
     }
 
     public function setMacros($id, $weight) {
-        var_dump($this->calories);
-      
+
+
 
         if (($id == !null) && ($this->calories == null) && ($this->protein == !null)) {
             $this->calories = ($this->protein * self::PROTEIN_CALORIES) + ($this->fat * self::FAT_CALORIES) + ($this->carbohydrate * self::CARBOHYDRATE_CALORIES);
@@ -142,6 +159,41 @@ class Macronutrient {
     public function decreaseCaloriesTwice($calories) {
         $this->calories = $calories - 200;
         return $this->calories;
+    }
+
+    public function mealPreferences($id) {
+        var_dump($this->mealPref);
+        $this->calories = $this->calories - ($this->protein * self::PROTEIN_CALORIES);
+
+        
+        
+        if ($this->mealPref == '1') {
+            $multipler = 0.8;
+        } elseif ($this->mealPref == '2') {
+            $multipler = 0.7;
+        } elseif ($this->mealPref == '3') {
+            $multipler = 0.6;
+        } elseif ($this->mealPref == '4') {
+            $multipler = 0.5;
+        } elseif ($this->mealPref == '5') {
+            $multipler = 0.4;
+        } elseif ($this->mealPref == '6') {
+            $multipler = 0.3;
+        }
+        $this->carbohydrate = round(($this->calories * $multipler) / self::CARBOHYDRATE_CALORIES);
+        $this->fat = round(($this->calories - ($this->carbohydrate * self::CARBOHYDRATE_CALORIES)) / self::FAT_CALORIES);
+
+
+        $calories = $this->calories + ($this->protein * self::PROTEIN_CALORIES);
+        $fat = $this->fat;
+        $carbohydrate = $this->carbohydrate;
+        $protein = $this->protein;
+
+        $this->database->updateRow('macro', "protein='$protein', "
+                . "fat='$fat', "
+                . "carbohydrate='$carbohydrate', "
+                . "calories='$calories' "
+                . "WHERE id = '$id'");
     }
 
 }

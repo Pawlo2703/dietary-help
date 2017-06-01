@@ -152,14 +152,14 @@ class Person {
     public function loadPersonalData($id) {
 
         $result = $this->database->join('weight.user_id, (SELECT weight.isSunday from weight where weight.user_id=? ORDER by weight.date DESC limit 1) as isSunday, weight.weight, (SELECT weight.date from weight where weight.user_id=? ORDER by weight.date DESC limit 1) as date, weight.id, person.height, person.weight, person.state', 'weight', 'person', "person.id = weight.user_id WHERE person.id = ?  ", [$id, $id, $id]);
-var_dump($result);
+
         if (!empty($result)) {
             $this->id = $result['id'];
             $this->weight = $result['weight'];
             $this->height = $result['height'];
             $this->state = $result['state'];
             $this->date = $result['date'];
-             $this->isSunday = $result['isSunday'];
+            $this->isSunday = $result['isSunday'];
         }
     }
 

@@ -51,7 +51,7 @@ class Weight extends Controller {
         $dailyWeight->getSevenWeightsLastWeek($id);
         $dailyWeight->getSevenWeights($id);
         $macro->loadMacros($id);
-       $person->isSundayUpdate($id);
+        $person->isSundayUpdate($id);
 
         $calories = $macro->getCalories();
 
@@ -60,6 +60,10 @@ class Weight extends Controller {
         $weight = $person->getWeight();
 
         $macro->setMacros($id, $weight);
+
+
+
+        header("Location: http://localhost/Tren/public/UserDetails/Display");
     }
 
 }
