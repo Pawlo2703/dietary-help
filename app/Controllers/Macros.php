@@ -34,9 +34,10 @@ class Macros extends Controller {
         $macro->setProtein($params['protein']);
         $macro->setFat($params['fat']);
         $macro->setCarbohydrate($params['carbs']);
+        $weight = $person->getWeight();
         $person->init($params);
         $person->personalData($id);
-        $macro->setMacros($id);
+        $macro->setMacros($id, $weight);
 
         header("Location: http://localhost/Tren/public/Macros/userTwo");
     }

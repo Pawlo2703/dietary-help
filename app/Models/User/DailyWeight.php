@@ -4,6 +4,7 @@ namespace Tren\Models\User;
 
 use Tren\Models\User;
 use Tren\Models\Calculator\Activities\Person;
+use Tren\Models\User\Macronutrient;
 
 class DailyWeight {
 
@@ -70,7 +71,7 @@ class DailyWeight {
      */
     public function __construct() {
         if ($this->database = \Tren\Core\Database::getInstance()) {
-            
+            $this->macros = new Macronutrient();
         }
     }
 
@@ -95,53 +96,54 @@ class DailyWeight {
             $result2 = $this->database->getRows('sum(weight)', 'weight', "WHERE WEEKOFYEAR(date)=WEEKOFYEAR(NOW())-1 AND user_id = ?", [$id]);
         } else {
 
-            echo "not enough weigh ins during this week";
+            // echo "not enough weigh ins during this week";
+            return;
         }
         $this->avgWeightLW = round($result2[0]['sum(weight)']) / count($result);
 
         return $this->avgWeightLW;
     }
 
-    public function macroUpdate($state) {
+    public function macroUpdate($state, $calories) {
 
         $difference = $this->avgWeight - $this->avgWeightLW;
 
 
         if ($state == 'Lean bulk') {
 
-            if ($difference <= 0.2 && $difference > -10) {
-                echo "skok o 1";
+            if ($difference <= 0.2 && $difference > -20) {
+                return $this->macros->increaseCalories($calories);
             } else if ($difference <= 0.4 && $difference > 0.2) {
                 echo "prztrzymac";
             } else if ($difference <= 3 && $difference > 0.4) {
-                echo "uciac 1";
+                return $this->macros->decreaseCalories($calories);
             }
         } else if ($state == 'Regular bulk') {
 
-            if ($difference <= 0.1 && $difference > -10) {
-                echo "skok o 2";
+            if ($difference <= 0.1 && $difference > -20) {
+                return $this->macros->increaseCaloriesTwice($calories);
             } else if ($difference <= 0.3 && $difference > 0.1) {
-                echo "skok o 1";
+                return $this->macros->increaseCalories($calories);
             } else if ($difference <= 0.6 && $difference > 0.3) {
                 echo "przytrzymac";
             } else if ($difference <= 3 && $difference > 0.6) {
-                echo "uciac 1";
+                return $this->macros->decreaseCalories($calories);
             }
         } else if ($state == 'Mini cut') {
 
-            if ($difference <= 0.2 && $difference > 2) {
-                echo "skok o 2";
+            if ($difference <= 0.2 && $difference > 20) {
+                return $this->macros->decreaseCaloriesTwice();
             } else if ($difference <= 0.5 && $difference > 0.2) {
-                echo "skok o 1";
+                return $this->macros->decreaseCalories();
             } else if ($difference <= 3 && $difference > 0.5) {
                 echo "przytrzymać";
             }
         } else if ($state == 'Long term cut') {
 
-            if ($difference <= 0.2 && $difference > 2) {
-                echo "skok o 2";
+            if ($difference <= 0.2 && $difference > 20) {
+                return $this->macros->decreaseCaloriesTwice();
             } else if ($difference <= 0.3 && $difference > 0.2) {
-                echo "skok o 1";
+                return $this->macros->decreaseCalories();
             } else if ($difference <= 3 && $difference > 0.3) {
                 echo "przytrzymać";
             }

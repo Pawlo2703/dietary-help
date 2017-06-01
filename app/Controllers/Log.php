@@ -4,6 +4,7 @@ namespace Tren\Controllers;
 
 use Tren\Core\Controller;
 use Tren\Models\User;
+use Tren\Models\User\Macronutrient;
 
 /*
  * Class Log
@@ -25,6 +26,7 @@ class Log extends Controller {
     public function Login() {
 
         $user = new User();
+        $macro = new User\Macronutrient;
         $userId = $user->findByLogin($this->getParam('login'));
 
         if (!$userId) {
@@ -42,8 +44,12 @@ class Log extends Controller {
             $this->session->set('zmienna', $user->getLogin());
             $this->session->set('zmienna2', $user->getId());
 
-
-            $this->view('home/macros');
+            $macro->loadMacros($userId);
+            if ($macro->getProtein() != null) {
+                header("Location: http://localhost/Tren/public/UserDetails/display");
+            } else {
+                $this->view('home/macros');
+            }
         }
     }
 
@@ -56,12 +62,13 @@ class Log extends Controller {
             $this->session->destroy('zmienna');
             $this->session->destroy('zmienna2');
 
+            
             $this->view('home/login');
-            echo "You are now logged out.";
+echo "You are now logged out.";
             return;
         }
+        echo "Log in first, idiot.";
         $this->view('home/login');
-        echo "I couldn't log you out, sorry.";
     }
 
 }

@@ -25,8 +25,7 @@ include('headfoot/header.php')
         <button type="submit" >Submit</button>
     </form>
 </div>
-<!-- dlaczego mi tu w loginie i passwordzie wyswietla jakies randomowe literki !-->
-    
+<!-- dlaczego 
     
     
     <!-- footer !--> 

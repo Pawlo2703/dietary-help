@@ -74,23 +74,46 @@ class Macronutrient {
         $this->person->setWeight($data['weight']);
     }
 
-    public function setMacros($id) {
-
+    public function setMacros($id, $weight) {
+        var_dump($this->calories);
+      
 
         if (($id == !null) && ($this->calories == null) && ($this->protein == !null)) {
             $this->calories = ($this->protein * self::PROTEIN_CALORIES) + ($this->fat * self::FAT_CALORIES) + ($this->carbohydrate * self::CARBOHYDRATE_CALORIES);
         } else if (($id == !null) && ($this->protein == null) && ($this->calories == !null)) {
 
-            $this->protein = $this->person->getWeight() * self::PROTEIN_MULTIPLER;
+            $this->protein = $weight * self::PROTEIN_MULTIPLER;
+            $this->fat = (($this->calories - ($this->protein * self::PROTEIN_CALORIES)) * self::FAT_MULTIPLER) / self::FAT_CALORIES;
+            $this->carbohydrate = ($this->calories - ($this->protein * self::PROTEIN_CALORIES + $this->fat * self::FAT_CALORIES)) / self::CARBOHYDRATE_CALORIES;
+        } else if (($id == !null) && ($this->protein == !null) && ($this->calories == !null)) {
+
+            $this->protein = $weight * self::PROTEIN_MULTIPLER;
             $this->fat = (($this->calories - ($this->protein * self::PROTEIN_CALORIES)) * self::FAT_MULTIPLER) / self::FAT_CALORIES;
             $this->carbohydrate = ($this->calories - ($this->protein * self::PROTEIN_CALORIES + $this->fat * self::FAT_CALORIES)) / self::CARBOHYDRATE_CALORIES;
         }
 
-        $this->database->insertRow('macro', "(`id`, `protein`,`fat`, `carbohydrate`, `calories`) VALUES(?,?,?,?,?)", [$id, round($this->protein, 0), round($this->fat, 0), round($this->carbohydrate, 0), round($this->calories, 0)]);
+        $result = $this->database->getRow('*', 'macro', "WHERE id = ?", [$id]);
+
+        if ($result > 0) {
+
+            $protein = round($this->protein);
+            $fat = round($this->fat);
+            $carbohydrate = round($this->carbohydrate);
+            $calories = $this->calories;
+
+            $this->database->updateRow('macro', "protein='$protein', "
+                    . "fat='$fat', "
+                    . "carbohydrate='$carbohydrate', "
+                    . "calories='$calories' "
+                    . "WHERE id = '$id'");
+        } else {
+
+            $this->database->insertRow('macro', "(`id`, `protein`,`fat`, `carbohydrate`, `calories`) VALUES(?,?,?,?,?)", [$id, round($this->protein, 0), round($this->fat, 0), round($this->carbohydrate, 0), round($this->calories, 0)]);
+        }
     }
 
     public function loadMacros($id) {
-        $result = $this->database->getRow('*','macro', "WHERE id = ?", [$id]);
+        $result = $this->database->getRow('*', 'macro', "WHERE id = ?", [$id]);
 
         if (!empty($result)) {
             $this->id = $result['id'];
@@ -99,6 +122,26 @@ class Macronutrient {
             $this->fat = $result['fat'];
             $this->carbohydrate = $result['carbohydrate'];
         }
+    }
+
+    public function increaseCaloriesTwice($calories) {
+        $this->calories = $calories + 200;
+        return $this->calories;
+    }
+
+    public function increaseCalories($calories) {
+        $this->calories = $calories + 100;
+        return $this->calories;
+    }
+
+    public function decreaseCalories($calories) {
+        $this->calories = $calories - 100;
+        return $this->calories;
+    }
+
+    public function decreaseCaloriesTwice($calories) {
+        $this->calories = $calories - 200;
+        return $this->calories;
     }
 
 }

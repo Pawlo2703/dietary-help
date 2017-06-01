@@ -7,12 +7,11 @@ use Tren\Models\Calculator\Calculator;
 /**
  * Class Person
  */
-class Person { //czemu rozszerzales o calc?  person nie ma raczej duzego zwizku z calculatorem. czekaj restart bo tnie mi tv
+class Person {
 
     /**
      * Basic Metabolism Rate multiplers
      */
-
     const WEIGHTMULTIPLER = 9.99;
     const HEIGHTMULTIPLER = 6.25;
     const AGEMULTIPLER = 4.92;
@@ -45,6 +44,15 @@ class Person { //czemu rozszerzales o calc?  person nie ma raczej duzego zwizku 
     private $state;
     private $id;
     private $date;
+    private $isSunday;
+
+    public function getIsSunday() {
+        return $this->isSunday;
+    }
+
+    public function setIsSunday($isSunday) {
+        $this->isSunday = $isSunday;
+    }
 
     public function getDate() {
         return $this->date;
@@ -141,35 +149,39 @@ class Person { //czemu rozszerzales o calc?  person nie ma raczej duzego zwizku 
         $this->database->insertRow('person', "(`id`, `weight`,`height`, `state`) VALUES(?,?,?,?)", [$id, $this->weight, $this->height, $this->state]);
     }
 
-    //SELECT name, surname, weight FROM user JOIN weight ON user.id = weight.user_id WHERE user.id = 1;
     public function loadPersonalData($id) {
 
-    $result = $this->database->join('weight.user_id, weight.weight, (SELECT weight.date from weight where weight.user_id=? ORDER by weight.date DESC limit 1) as date, weight.id, person.height, person.weight, person.state','weight','person', "person.id = weight.user_id WHERE person.id = ?  ", [$id, $id]);
-
+        $result = $this->database->join('weight.user_id, (SELECT weight.isSunday from weight where weight.user_id=? ORDER by weight.date DESC limit 1) as isSunday, weight.weight, (SELECT weight.date from weight where weight.user_id=? ORDER by weight.date DESC limit 1) as date, weight.id, person.height, person.weight, person.state', 'weight', 'person', "person.id = weight.user_id WHERE person.id = ?  ", [$id, $id, $id]);
+var_dump($result);
         if (!empty($result)) {
             $this->id = $result['id'];
             $this->weight = $result['weight'];
             $this->height = $result['height'];
             $this->state = $result['state'];
             $this->date = $result['date'];
-          
+             $this->isSunday = $result['isSunday'];
         }
-       
     }
-    
+
     public function updateDailyWeight($id) {
-        $result = $this->database->getRow('*','weight', "WHERE user_id = ? AND date = ?", [$id, $this->date]);
+        $result = $this->database->getRow('*', 'weight', "WHERE user_id = ? AND date = ?", [$id, $this->date]);
         if (isset($result['date'])) {
-         
+
             header("Location: http://localhost/Tren/public/UserDetails/display");
-            
-            
         } else {
             $this->database->insertRow('weight', "(`user_id`, `weight`, `date`) VALUES(?,?,?)", [$id, $this->weight, $this->date]);
             header("Location: http://localhost/Tren/public/UserDetails/display");
         }
     }
 
- 
-    
+    public function isSundayUpdate($id) {
+        $today = date("Y-m-d");
+        $result = $this->database->getRow('*', 'weight', "WHERE user_id = ? AND date=$today", [$id]);
+
+
+
+        $this->database->updateRow('weight', "isSunday='1'"
+                . "WHERE user_id = '$id' AND date= '$today' ");
+    }
+
 }

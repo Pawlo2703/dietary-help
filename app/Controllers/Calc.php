@@ -38,15 +38,16 @@ class Calc extends Controller {
 
         $id = ($this->session->get('zmienna2'));
         $user->setCalories($calc->getTdee());
-        
-       
+
+
         $person->init($params);
         $person->personalData($id);
-        
-         $user->init($params);
-        $user->setMacros($id);
 
+        $user->init($params);
+        $weight = $person->getWeight();
+        $user->setMacros($id, $weight);
 
+        header("Location: http://localhost/Tren/public/UserDetails/display");
     }
 
     /**
