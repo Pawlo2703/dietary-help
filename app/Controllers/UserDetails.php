@@ -30,7 +30,7 @@ class UserDetails extends Controller {
         $person->loadPersonalData($id);
        
         $weight->getSevenWeightsLastWeek($id);
-        
+        var_dump($weight->getSevenWeightsLastWeek($id));
   
         $data = [
             'user' => $user,

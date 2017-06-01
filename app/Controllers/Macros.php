@@ -39,7 +39,7 @@ class Macros extends Controller {
         $person->personalData($id);
         $macro->setMacros($id, $weight);
 
-        header("Location: http://localhost/Tren/public/Macros/userTwo");
+        header("Location: http://localhost/Tren/public/UserDetails/Display");
     }
 
 }

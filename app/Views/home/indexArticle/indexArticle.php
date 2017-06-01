@@ -52,7 +52,7 @@
     $today = date('w');
     $today2 = date("Y-m-d");
 
-    if (($today == '4') && (($data['person']->getDate()) == $today2) && (($data['person']->getIsSunday()) == 0)) :
+    if (($today == '4') && (($data['person']->getDate()) == $today2) && (($data['person']->getIsSunday()) == 0) && ($data['weight']->getAvgWeightLW() > 1)) :
         ?>
         <div class="reg">
             <form method="post" action="http://localhost/Tren/public/weight/weightcompare">
