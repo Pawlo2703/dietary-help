@@ -3,7 +3,6 @@
 namespace Tren\Models;
 
 use Tren\Models\User\Macronutrient;
-
 /**
  * 
  * Class User
@@ -27,7 +26,6 @@ class User {
      * @var password
      */
     private $password;
-    
 
     /**
      * 
@@ -92,7 +90,7 @@ class User {
      * @return int
      */
     public function findByLogin($login) {
-        $result = $this->database->getRow('*','user', "WHERE login = ?", [$login]);
+        $result = $this->database->getRow('*', 'user', "WHERE login = ?", [$login]);
         return isset($result['id']) ? $result['id'] : 0;
     }
 
@@ -102,7 +100,7 @@ class User {
      * @return string
      */
     public function checkPassword($id) {
-        $result = $this->database->getRow('*','user', "WHERE id = ?", [$id]);
+        $result = $this->database->getRow('*', 'user', "WHERE id = ?", [$id]);
         return isset($result['password']) ? $result['password'] : 0;
     }
 
@@ -111,7 +109,7 @@ class User {
      * @param int $id
      */
     public function load($id) {
-        $result = $this->database->getRow('*','user', "WHERE id = ?", [$id]);
+        $result = $this->database->getRow('*', 'user', "WHERE id = ?", [$id]);
 
         if (!empty($result)) {
             $this->id = $result['id'];
@@ -153,7 +151,12 @@ class User {
      * User register
      */
     public function register() {
-        $this->database->insertRow('user', "( `login`, `password`) VALUES(?,?)", [$this->login, $this->password]);
+        $result = $this->database->getRow('*', 'user', "WHERE login = ?", [$this->login]);
+        if (!$result) {
+            $this->database->insertRow('user', "( `login`, `password`) VALUES(?,?)", [$this->login, $this->password]);
+            return $result;
+        }
+            return NULL;
+        }
     }
-
-}
+    

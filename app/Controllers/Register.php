@@ -26,13 +26,18 @@ class Register extends Controller {
     public function register() {
         $add = new User();
         $add->setLogin($this->getParam('login'));
+        $login = $this->getParam('login');
 
         $password = $this->getParam('password');
         $add->setPassword(password_hash($password, PASSWORD_DEFAULT, ['cost' => 10]));
 
-
-        $add->register();
-        $this->view('home/login');
+if($add->register()) {
+    $this->view('home/login');
+} else {
+    $this->view('home/registerError');
+}
+        
+       
     }
 
 }

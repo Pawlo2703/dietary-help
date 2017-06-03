@@ -28,7 +28,7 @@ class UserDetails extends Controller {
         $user->load($id);
         $macro->loadMacros($id);
         $person->loadPersonalData($id);
-       
+      
         $weight->getSevenWeightsLastWeek($id);
         var_dump($weight->getSevenWeightsLastWeek($id));
   
