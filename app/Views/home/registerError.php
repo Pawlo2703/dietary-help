@@ -10,7 +10,7 @@ include('headfoot/header.php')
     include('headfoot/menu.php')
     ?>
 <div class="reg">
-    <h3>Error: Login name already exists</h3>
+    <h3>Error: Login name already exists.</h3>
     <h1></br>Create new account</h1>
     <form method="post" action="http://localhost/Tren/public/register/register">
         <label><b>Account login:</b></label> <input autocomplete="off" name="login" type="text" placeholder="Login">

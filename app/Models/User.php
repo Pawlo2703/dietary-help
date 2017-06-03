@@ -153,8 +153,8 @@ class User {
     public function register() {
         $result = $this->database->getRow('*', 'user', "WHERE login = ?", [$this->login]);
         if (!$result) {
-            $this->database->insertRow('user', "( `login`, `password`) VALUES(?,?)", [$this->login, $this->password]);
-            return $result;
+            $result2 = $this->database->insertRow('user', "( `login`, `password`) VALUES(?,?)", [$this->login, $this->password]);
+            return $result2;
         }
             return NULL;
         }

@@ -27,29 +27,34 @@ class Log extends Controller {
 
         $user = new User();
         $macro = new User\Macronutrient;
-        $userId = $user->findByLogin($this->getParam('login'));
+        if ($userId = $user->findByLogin($this->getParam('login'))) {
 
-        if (!$userId) {
-            $this->view('home/login');
-            return;
-        }
-
-        $userPw = $user->checkPassword($userId);
-        $pw = $this->getParam('password');
-
-        if (password_verify($pw, $userPw)) {
-
-            $user->load($userId);
-
-            $this->session->set('zmienna', $user->getLogin());
-            $this->session->set('zmienna2', $user->getId());
-
-            $macro->loadMacros($userId);
-            if ($macro->getProtein() != null) {
-                header("Location: http://localhost/Tren/public/UserDetails/display");
-            } else {
-                $this->view('home/macros');
+            if (!$userId) {
+                $this->view('home/login');
+                return;
             }
+
+            $userPw = $user->checkPassword($userId);
+            $pw = $this->getParam('password');
+
+            if (password_verify($pw, $userPw)) {
+
+                $user->load($userId);
+
+                $this->session->set('zmienna', $user->getLogin());
+                $this->session->set('zmienna2', $user->getId());
+
+                $macro->loadMacros($userId);
+                if ($macro->getProtein() != null) {
+                    header("Location: http://localhost/Tren/public/UserDetails/display");
+                } else {
+                    $this->view('home/macros');
+                }
+            } else {
+                $this->view('home/loginError');
+            }
+        } else {
+            $this->view('home/loginError');
         }
     }
 
@@ -62,9 +67,9 @@ class Log extends Controller {
             $this->session->destroy('zmienna');
             $this->session->destroy('zmienna2');
 
-            
+
             $this->view('home/login');
-echo "You are now logged out.";
+            echo "You are now logged out.";
             return;
         }
         echo "Log in first, idiot.";

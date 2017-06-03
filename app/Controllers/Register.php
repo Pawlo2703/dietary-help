@@ -31,13 +31,11 @@ class Register extends Controller {
         $password = $this->getParam('password');
         $add->setPassword(password_hash($password, PASSWORD_DEFAULT, ['cost' => 10]));
 
-if($add->register()) {
-    $this->view('home/login');
-} else {
-    $this->view('home/registerError');
-}
-        
-       
+        if ($add->register() == !NULL) {
+            $this->view('home/loginAfterReg');
+        } else {
+            $this->view('home/registerError');
+        }
     }
 
 }
