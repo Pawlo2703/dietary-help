@@ -170,7 +170,6 @@ class Calculator {
     }
 
     public function nonExerciseActivityThermogenesis() {
-
         if ($this->activities->getActivity() == 'Setendary') {
             $this->neat = (Activities::SETENDARYACTIVITY );
         } else if ($this->activities->getActivity() == 'Moderate') {
@@ -191,13 +190,13 @@ class Calculator {
         $this->thermicEffectOfFood();
 
         if ($this->person->getState() == 'Regular bulk') {
-            $this->tdee = ($this->person->getBasicMetabolismRate() + ($this->tea / 7) + $this->neat + $this->tef)*self::REGULAR_BULK;
+            $this->tdee = ($this->person->getBasicMetabolismRate() + ($this->tea / 7) + $this->neat + $this->tef) * self::REGULAR_BULK;
         } else if ($this->person->getState() == 'Lean bulk') {
-            $this->tdee = ($this->person->getBasicMetabolismRate() + ($this->tea / 7) + $this->neat + $this->tef)*self::LEAN_BULK;
+            $this->tdee = ($this->person->getBasicMetabolismRate() + ($this->tea / 7) + $this->neat + $this->tef) * self::LEAN_BULK;
         } else if ($this->person->getState() == 'Mini cut') {
-            $this->tdee = ($this->person->getBasicMetabolismRate() + ($this->tea / 7) + $this->neat + $this->tef)*self::MINI_CUT;
+            $this->tdee = ($this->person->getBasicMetabolismRate() + ($this->tea / 7) + $this->neat + $this->tef) * self::MINI_CUT;
         } else if ($this->person->getState() == 'Long term cut') {
-            $this->tdee = ($this->person->getBasicMetabolismRate() + ($this->tea / 7) + $this->neat + $this->tef)*self::LONG_TERM_CUT;
+            $this->tdee = ($this->person->getBasicMetabolismRate() + ($this->tea / 7) + $this->neat + $this->tef) * self::LONG_TERM_CUT;
         }
         var_dump($this->tdee);
         return $this->tdee;

@@ -32,6 +32,22 @@ class Calc extends Controller {
         $user = new Macronutrient();
         $person = new Person();
 
+        $digit = $params;
+        $to_delete = array('activity', 'state', 'cardio', 'workout', 'state', 'url', 'gender');
+        
+        foreach ($to_delete as $key) {
+            unset($digit[$key]);
+        }
+
+        foreach ($digit as $numeric) {
+            if (is_numeric($numeric)) {
+                
+            } else {
+                
+                $this->view('home/calculatorDigitError');
+                exit();
+            }
+        }
         $calc->init($params);
         $calc->totaldailyEnergyExpenditure();
 

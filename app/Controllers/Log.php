@@ -72,7 +72,7 @@ class Log extends Controller {
             echo "You are now logged out.";
             return;
         }
-        echo "Log in first, idiot.";
+        echo "Log in first.";
         $this->view('home/login');
     }
 

@@ -30,6 +30,25 @@ class Macros extends Controller {
         $macro = new Macronutrient();
         $person = new Person();
 
+        
+                $digit = $params;
+        $to_delete = array('state','url');
+        
+        foreach ($to_delete as $key) {
+            unset($digit[$key]);
+        }
+
+        foreach ($digit as $numeric) {
+            if (is_numeric($numeric)) {
+                
+            } else {
+                
+                $this->view('home/nocalculatorNumericError');
+                exit();
+            }
+        }
+        
+        
         $id = ($this->session->get('zmienna2'));
         $macro->setProtein($params['protein']);
         $macro->setFat($params['fat']);
