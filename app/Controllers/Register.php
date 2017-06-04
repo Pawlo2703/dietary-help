@@ -15,7 +15,6 @@ class Register extends Controller {
      */
 
     public function User() {
-
         $this->view('home/register');
     }
 
@@ -25,16 +24,25 @@ class Register extends Controller {
 
     public function register() {
         $add = new User();
-        $add->setLogin($this->getParam('login'));
-        $login = $this->getParam('login');
+        $params = $this->getParameters();
 
-        $password = $this->getParam('password');
-        $add->setPassword(password_hash($password, PASSWORD_DEFAULT, ['cost' => 10]));
+        
+        if (strlen($params['login']) < 15) {
+            $add->setLogin($params['login']);
+        } else {
+            $this->view('home/registerLoginOrPwTooLong');
+        }
+
+        if (strlen($params['password']) < 15) {
+            $add->setPassword(password_hash($params['password'], PASSWORD_DEFAULT, ['cost' => 10]));
+        } else {
+            $this->view('home/registerLoginOrPwTooLong');
+        }
 
         if ($add->register() == !NULL) {
             $this->view('home/loginAfterReg');
         } else {
-            $this->view('home/registerError');
+            $this->view('home/registerLoginOrPwExists');
         }
     }
 
