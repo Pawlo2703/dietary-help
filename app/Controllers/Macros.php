@@ -17,7 +17,14 @@ class Macros extends Controller {
      */
     public function User() {
         $this->session->loginCheck();
-        $this->view('home/nocalculator');
+        $id = ($this->session->get('zmienna2'));
+        $macro = new Macronutrient();
+        $macro->loadMacros($id);
+        if ($macro->getProtein() > 0) {
+             header("Location: http://localhost/Tren/public/UserDetails/Display");
+        } else {
+            $this->view('home/nocalculator');
+        }
     }
 
     /**
@@ -30,10 +37,11 @@ class Macros extends Controller {
         $macro = new Macronutrient();
         $person = new Person();
 
-        
-                $digit = $params;
-        $to_delete = array('state','url');
-        
+
+
+        $digit = $params;
+        $to_delete = array('state', 'url');
+
         foreach ($to_delete as $key) {
             unset($digit[$key]);
         }
@@ -42,13 +50,14 @@ class Macros extends Controller {
             if (is_numeric($numeric)) {
                 
             } else {
-                
+
                 $this->view('home/nocalculatorNumericError');
                 exit();
             }
         }
-        
-        
+
+
+
         $id = ($this->session->get('zmienna2'));
         $macro->setProtein($params['protein']);
         $macro->setFat($params['fat']);

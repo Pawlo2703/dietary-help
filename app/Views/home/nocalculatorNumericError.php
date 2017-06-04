@@ -33,7 +33,7 @@ include('headfoot/header.php')
        <label><b>Weight:</b></label> <input autocomplete="off" name="weight" type="text" placeholder="Weight">
         <label><b>Height:</b></label> <input autocomplete="off" name="height" type="text" placeholder="Height">
        <p>Your goal:</p><select class="body_text" onchange="getText(this)" name="state">
-                <option>Choose one..</option>
+                <option style="display:none">Choose one..</option>
                 <option>Regular bulk</option>
                 <option>Lean bulk</option>
                 <option>Mini cut</option>

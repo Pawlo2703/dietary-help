@@ -52,7 +52,7 @@ include('headfoot/header.php')
   <option >Moderate</option>
   <option >Intense</option></select>
   <p>Your goal:</p><select class="body_text" onchange="getText(this)" name="state">
-                <option>Choose one..</option>
+                <option style="display:none">Choose one..</option>
                 <option>Regular bulk</option>
                 <option>Lean bulk</option>
                 <option>Mini cut</option>

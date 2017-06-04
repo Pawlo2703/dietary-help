@@ -18,7 +18,14 @@ class Calc extends Controller {
      */
     public function User() {
         $this->session->loginCheck();
-        $this->view('home/calculator');
+        $id = ($this->session->get('zmienna2'));
+        $macro = new Macronutrient();
+        $macro->loadMacros($id);
+        if ($macro->getProtein() > 0) {
+             header("Location: http://localhost/Tren/public/UserDetails/Display");
+        } else {
+            $this->view('home/calculator');
+        }
     }
 
     /**

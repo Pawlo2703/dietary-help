@@ -27,7 +27,10 @@
             </tr>
             <tr>
                 <td>Carbohydrate:<?= $data['macro']->getCarbohydrate() ?></td>
-                <td>Goal: <?= $data['person']->getState() ?></td>
+                <?php
+                    if ($data['person']->getState()): ?>
+                <td>Goal: <?= $data['person']->getState() ?><?php endif; ?></td>
+                
             </tr>
         </tbody>
     </table>
