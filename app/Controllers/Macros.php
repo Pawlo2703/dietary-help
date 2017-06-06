@@ -23,7 +23,7 @@ class Macros extends Controller {
         if ($macro->getProtein() > 0) {
              header("Location: http://localhost/Tren/public/UserDetails/Display");
         } else {
-            $this->view('home/nocalculator');
+            $this->view('home/macronutrient/form/details_form');
         }
     }
 
@@ -51,7 +51,7 @@ class Macros extends Controller {
                 
             } else {
 
-                $this->view('home/nocalculatorNumericError');
+                $this->view('home/macronutrient/form/error/numeric_error');
                 exit();
             }
         }

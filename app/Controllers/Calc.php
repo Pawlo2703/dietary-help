@@ -12,7 +12,7 @@ use Tren\Models\Calculator\Activities\Person;
  * Class Calc
  */
 class Calc extends Controller {
-
+    
     /**
      * Displays calculator forms
      */
@@ -22,9 +22,9 @@ class Calc extends Controller {
         $macro = new Macronutrient();
         $macro->loadMacros($id);
         if ($macro->getProtein() > 0) {
-             header("Location: http://localhost/Tren/public/UserDetails/Display");
+            header("Location: http://localhost/Tren/public/UserDetails/Display");
         } else {
-            $this->view('home/calculator');
+            $this->view('home/calculator/calculator');
         }
     }
 
@@ -41,7 +41,7 @@ class Calc extends Controller {
 
         $digit = $params;
         $to_delete = array('activity', 'state', 'cardio', 'workout', 'state', 'url', 'gender');
-        
+
         foreach ($to_delete as $key) {
             unset($digit[$key]);
         }
@@ -50,8 +50,8 @@ class Calc extends Controller {
             if (is_numeric($numeric)) {
                 
             } else {
-                
-                $this->view('home/calculatorDigitError');
+
+                $this->view('home/calculator/error/numeric_error');
                 exit();
             }
         }
@@ -74,11 +74,11 @@ class Calc extends Controller {
     }
 
     /**
-     * Displays form
+     * Displays form po co to?
      */
-    public function userTwo() {
-
-        $this->view('home/details');
-    }
-
+//    public function userTwo() {
+//
+//        $this->view('home/details');
+//    }
+//
 }

@@ -8,16 +8,16 @@
   
 
 
-include('headfoot/header.php')
+include __DIR__ . '/../headfoot/header.php'
 ?>
 
 <body>
     <!-- menu & img !-->
     <?php
-    include('headfoot/menu.php')
+    include __DIR__ . '/../headfoot/menu.php'
     ?>
 <div class="reg">
-    <h1>Log in</h1>
+    <h1>Your account has been created, you can log in now.</h1>
     <form method="post" action="http://localhost/Tren/public/log/login">
         
         <label><b>Your login:</b></label> <input name="login" type="text" placeholder="Login">
@@ -30,7 +30,7 @@ include('headfoot/header.php')
     
     <!-- footer !--> 
     <?php
-    include('headfoot/footer.php')
+    include __DIR__ . '/../headfoot/footer.php'
     ?>
 
 

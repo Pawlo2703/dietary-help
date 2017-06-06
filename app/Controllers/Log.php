@@ -17,7 +17,7 @@ class Log extends Controller {
      */
     public function User() {
 
-        $this->view('home/login');
+        $this->view('home/login/login');
     }
 
     /**
@@ -30,7 +30,7 @@ class Log extends Controller {
         if ($userId = $user->findByLogin($this->getParam('login'))) {
 
             if (!$userId) {
-                $this->view('home/login');
+                $this->view('home/login/login');
                 return;
             }
 
@@ -48,13 +48,13 @@ class Log extends Controller {
                 if ($macro->getProtein() != null) {
                     header("Location: http://localhost/Tren/public/UserDetails/display");
                 } else {
-                    $this->view('home/macros');
+                    $this->view('home/macronutrient/macronutrient');
                 }
             } else {
-                $this->view('home/loginError');
+                $this->view('home/login/error/incorrect_details');
             }
         } else {
-            $this->view('home/loginError');
+            $this->view('home/login/error/incorrect_details');
         }
     }
 
@@ -68,12 +68,12 @@ class Log extends Controller {
             $this->session->destroy('zmienna2');
 
 
-            $this->view('home/login');
+            $this->view('home/login/login');
             echo "You are now logged out.";
             return;
         }
         echo "Log in first.";
-        $this->view('home/login');
+        $this->view('home/login/login');
     }
 
 }

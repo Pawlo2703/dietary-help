@@ -1,13 +1,14 @@
 
 <!-- header !-->
 <?php
-include('headfoot/header.php')
+include __DIR__ . '/../headfoot/header.php'
+
 ?>
 
 <body>
     <!-- menu & img !-->
     <?php
-    include('headfoot/menu.php')
+    include __DIR__ . '/../headfoot/menu.php'
     ?>
 <div class="reg">
     <h1>Create new account</h1>
@@ -22,7 +23,7 @@ include('headfoot/header.php')
     
     <!-- footer !--> 
     <?php
-    include('headfoot/footer.php')
+    include __DIR__ . '/../headfoot/footer.php'
     ?>
 
 

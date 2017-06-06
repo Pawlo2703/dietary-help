@@ -17,7 +17,7 @@ class MealPref extends Controller {
      */
     public function User() {
         $this->session->loginCheck();
-        $this->view('home/mealPreferences');
+        $this->view('home/macronutrient/macronutirient_preferences');
     }
 
     /**

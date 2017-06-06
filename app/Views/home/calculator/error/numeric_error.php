@@ -14,16 +14,17 @@ document.getElementById('textDiv').innerHTML = DivTxt[txtSelected];
 </script>
 <!-- header !-->
 <?php
-include('headfoot/header.php')
+include __DIR__ . '/../../headfoot/header.php'
 ?>
 
 <body>
     <!-- menu & img !-->
     <?php
-    include('headfoot/menu.php')
+    include __DIR__ . '/../../headfoot/menu.php'
     ?>
 
 <div class="reg">
+    <h3>Something went wrong, make sure that values of age, weight, height, time and times of week are digit!</h1>
     <h1>Calculate your macro intake</h1>
     <form method="post" action="http://localhost/Tren/public/calc/setMacros">
         <label><b>Age:</b></label> <input autocomplete="off" name="age" type="text" placeholder="Age">
@@ -66,7 +67,7 @@ include('headfoot/header.php')
     
     <!-- footer !-->
     <?php
-    include('headfoot/footer.php')
+    include __DIR__ . '/../../headfoot/footer.php'
     ?>
 
   

@@ -12,13 +12,13 @@ use Tren\Models\User\Macronutrient;
  */
 class Weight extends Controller {
 
-    /**
-     * Displays calculator forms
-     */
-    public function display() {
-        $this->session->loginCheck();
-        $this->view('home/weight_in');
-    }
+//    /**
+//     * Displays calculator forms
+//     */
+//    public function display() {
+//        $this->session->loginCheck();
+//        $this->view('home/weight_in');
+//    } do wyjebki chyba
 
     /**
      * 
