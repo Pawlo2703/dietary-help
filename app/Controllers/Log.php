@@ -46,7 +46,7 @@ class Log extends Controller {
 
                 $macro->loadMacros($userId);
                 if ($macro->getProtein() != null) {
-                    header("Location: http://localhost/Tren/public/UserDetails/display");
+                    $this->redirect("UserDetails", "Display", array(""));
                 } else {
                     $this->view('home/macronutrient/macronutrient');
                 }

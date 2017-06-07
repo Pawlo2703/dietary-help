@@ -166,11 +166,9 @@ class Person {
     public function updateDailyWeight($id) {
         $result = $this->database->getRow('*', 'weight', "WHERE user_id = ? AND date = ?", [$id, $this->date]);
         if (isset($result['date'])) {
-
-            header("Location: http://localhost/Tren/public/UserDetails/display");
+            
         } else {
             $this->database->insertRow('weight', "(`user_id`, `weight`, `date`) VALUES(?,?,?)", [$id, $this->weight, $this->date]);
-            header("Location: http://localhost/Tren/public/UserDetails/display");
         }
     }
 

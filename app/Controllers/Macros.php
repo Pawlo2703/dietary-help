@@ -6,6 +6,7 @@ use Tren\Core\Controller;
 use Tren\Models\User;
 use Tren\Models\User\Macronutrient;
 use Tren\Models\Calculator\Activities\Person;
+use Tren\Controllers\UserDetails;
 
 /**
  * Class Macros
@@ -21,7 +22,9 @@ class Macros extends Controller {
         $macro = new Macronutrient();
         $macro->loadMacros($id);
         if ($macro->getProtein() > 0) {
-             header("Location: http://localhost/Tren/public/UserDetails/Display");
+
+            $this->redirect("UserDetails", "Display", array(""));
+                    
         } else {
             $this->view('home/macronutrient/form/details_form');
         }
@@ -67,7 +70,8 @@ class Macros extends Controller {
         $person->personalData($id);
         $macro->setMacros($id, $weight);
 
-        header("Location: http://localhost/Tren/public/UserDetails/Display");
+        $this->redirect("UserDetails", "Display", array(""));
+        
     }
 
 }

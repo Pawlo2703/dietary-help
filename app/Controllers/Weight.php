@@ -34,6 +34,7 @@ class Weight extends Controller {
         $person->setDate(date("Y/m/d"));
         $person->setWeight($params['weight']);
         $person->updateDailyWeight($id);
+        $this->redirect("UserDetails", "Display", array(""));
     }
 
     public function weightCompare() {
@@ -63,7 +64,7 @@ class Weight extends Controller {
 
 
 
-        header("Location: http://localhost/Tren/public/UserDetails/Display");
+        $this->redirect("UserDetails", "Display", array(""));
     }
 
 }

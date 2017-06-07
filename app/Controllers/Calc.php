@@ -22,7 +22,7 @@ class Calc extends Controller {
         $macro = new Macronutrient();
         $macro->loadMacros($id);
         if ($macro->getProtein() > 0) {
-            header("Location: http://localhost/Tren/public/UserDetails/Display");
+            $this->redirect("UserDetails", "Display", array(""));
         } else {
             $this->view('home/calculator/calculator');
         }
@@ -70,7 +70,7 @@ class Calc extends Controller {
         $weight = $person->getWeight();
         $user->setMacros($id, $weight);
 
-        header("Location: http://localhost/Tren/public/UserDetails/display");
+        $this->redirect("UserDetails", "Display", array(""));
     }
 
     /**

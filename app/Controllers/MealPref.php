@@ -28,12 +28,11 @@ class MealPref extends Controller {
         $params = $this->getParameters();
         $id = $this->session->get('zmienna2');
        
-        $macro = new Macronutrient;
-        var_dump($params['prefs']);
+        $macro = new Macronutrient; var_dump($params['prefs']);
         $macro->setMealPref($params['prefs']);      
         $macro->loadMacros($id);
         $macro->mealPreferences($id);
-       header("Location: http://localhost/Tren/public/UserDetails/Display");
+       $this->redirect("UserDetails", "Display", array(""));
 
     }
 

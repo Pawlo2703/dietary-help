@@ -36,4 +36,12 @@ class Controller {
         require_once '../app/Views/' . $view . '.php';
     }
 
+    public function redirect($controller, $method = "index", $args = array()) {
+
+        $location = '../' . $controller . "/" . $method . "/" . implode("/", $args);
+
+        header("Location: " . $location);
+        exit;
+    }
+
 }

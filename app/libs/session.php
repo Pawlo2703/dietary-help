@@ -2,6 +2,8 @@
 
 namespace Tren\libs;
 
+use Tren\Core\Controller;
+
 class Session {
 
     private $session = false;
@@ -69,8 +71,8 @@ class Session {
      */
     public function loginCheck() {
         if ($_SESSION['zmienna'] == NULL) {
-            
-            header('Location: http://localhost/Tren/public/log/user');
+           $controller = new Controller(); 
+           $controller->redirect("log", "user", array(""));
         }
     }
 
