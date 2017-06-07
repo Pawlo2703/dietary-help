@@ -10,7 +10,7 @@ use Tren\Models\Calculator\Activities\Person;
 /**
  * Class Macros
  */
-class MealPref extends Controller {
+class MealPreferences extends Controller {
 
     /**
      * Displays form

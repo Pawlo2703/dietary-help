@@ -4,14 +4,14 @@ namespace Tren\Controllers;
 
 use Tren\Core\Controller;
 use Tren\Models\User;
-use Tren\Models\Calculator\Calculator;
+use Tren\Models\Calculator\EnergyExpanditureCalculator;
 use Tren\Models\User\Macronutrient;
 use Tren\Models\Calculator\Activities\Person;
 
 /**
  * Class Calc
  */
-class Calc extends Controller {
+class Calculator extends Controller {
     
     /**
      * Displays calculator forms
@@ -35,7 +35,7 @@ class Calc extends Controller {
         $this->session->loginCheck();
         $params = $this->getParameters();
 
-        $calc = new Calculator();
+        $calc = new EnergyExpanditureCalculator();
         $user = new Macronutrient();
         $person = new Person();
 

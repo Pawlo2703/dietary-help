@@ -6,7 +6,7 @@ use Tren\Models\User;
 use Tren\Models\Calculator\Activities\Person;
 use Tren\Models\User\Macronutrient;
 
-class DailyWeight {
+class DailyWeighIn {
 
     const REQUIRED_DAYS = 2;
 

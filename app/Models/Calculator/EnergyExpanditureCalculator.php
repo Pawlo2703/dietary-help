@@ -10,7 +10,7 @@ use Tren\Models\Calculator\Activities\Workout;
 /**
  * Class Calculator
  */
-class Calculator {
+class EnergyExpanditureCalculator {
     /* Thermic effect of food */
 
     const TEF = 0.1;

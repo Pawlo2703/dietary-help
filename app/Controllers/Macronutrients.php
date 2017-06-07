@@ -11,7 +11,7 @@ use Tren\Controllers\UserDetails;
 /**
  * Class Macros
  */
-class Macros extends Controller {
+class Macronutrients extends Controller {
 
     /**
      * Displays form

@@ -20,7 +20,7 @@ class UserDetails extends Controller {
         $user = new User();
         $macro = new Macronutrient();
         $person = new Person();
-        $weight = new User\DailyWeight();
+        $weight = new User\DailyWeighIn();
         
         $this->session->loginCheck();
         $id = ($this->session->get('zmienna2'));

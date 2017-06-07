@@ -26,7 +26,7 @@ include __DIR__ . '/../../headfoot/header.php'
 <div class="reg">
     <h3>Something went wrong, make sure that values of age, weight, height, time and times of week are digit!</h1>
     <h1>Calculate your macro intake</h1>
-    <form method="post" action="http://localhost/Tren/public/calc/setMacros">
+    <form method="post" action="http://localhost/Tren/public/calculatorsetMacros">
         <label><b>Age:</b></label> <input autocomplete="off" name="age" type="text" placeholder="Age">
         <label><b>Weight:</b></label> <input autocomplete="off" name="weight" type="text" placeholder="Weight">
         <label><b>Height:</b></label> <input autocomplete="off" name="height" type="text" placeholder="Height">

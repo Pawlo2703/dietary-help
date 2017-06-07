@@ -2,7 +2,7 @@
 
 namespace Tren\Models\Calculator\Activities;
 
-use Tren\Models\Calculator\Calculator;
+use Tren\Models\Calculator\EnergyExpanditureCalculator;
 
 /**
  * Class Person

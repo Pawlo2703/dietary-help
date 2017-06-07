@@ -4,7 +4,7 @@ namespace Tren\Controllers;
 
 use Tren\Core\Controller;
 use Tren\Models\Calculator\Activities\Person;
-use Tren\Models\User\DailyWeight;
+use Tren\Models\User\DailyWeighIn;
 use Tren\Models\User\Macronutrient;
 
 /**
@@ -44,7 +44,7 @@ class Weight extends Controller {
 
 
         $person = new Person();
-        $dailyWeight = new DailyWeight();
+        $dailyWeight = new DailyWeighIn();
         $macro = new \Tren\Models\User\Macronutrient();
 
         $person->loadPersonalData($id);

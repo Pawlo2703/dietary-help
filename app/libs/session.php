@@ -66,13 +66,14 @@ class Session {
             }
         }
     }
+
     /**
      * Checks if value 'zmienna' is empty
      */
     public function loginCheck() {
         if ($_SESSION['zmienna'] == NULL) {
-           $controller = new Controller(); 
-           $controller->redirect("log", "user", array(""));
+            $controller = new Controller();
+            $controller->redirect("log", "user", array(""));
         }
     }
 

@@ -9,7 +9,7 @@ include __DIR__ . '/../headfoot/header.php'
     <?php
     include __DIR__ . '/../headfoot/menu.php'
     ?>
- <form method="post" action="http://localhost/Tren/public/MealPref/changeMacro">
+ <form method="post" action="http://localhost/Tren/public/MealPreferences/changeMacro">
   <p>Your diet calorie sources:</p><select class="body_text" name="prefs">
                 <option>Choose one..</option>
                 <option value="1">High Carb (80%)/(20%) Low fat</option>
