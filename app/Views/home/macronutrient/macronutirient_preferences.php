@@ -1,14 +1,4 @@
 
-<!-- header !-->
-<?php
-include __DIR__ . '/../headfoot/header.php'
-?>
-
-<body>
-    <!-- menu & img !-->
-    <?php
-    include __DIR__ . '/../headfoot/menu.php'
-    ?>
  <form method="post" action="http://localhost/Tren/public/MealPreferences/changeMacro">
   <p>Your diet calorie sources:</p><select class="body_text" name="prefs">
                 <option>Choose one..</option>

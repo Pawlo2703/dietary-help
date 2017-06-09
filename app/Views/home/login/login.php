@@ -1,14 +1,4 @@
 
-<!-- header !-->
-<?php
-include __DIR__ . '/../headfoot/header.php'
-?>
-
-<body>
-    <!-- menu & img !-->
-    <?php
-    include __DIR__ . '/../headfoot/menu.php'
-    ?>
 <div class="reg">
     <h1>Log in</h1>
     <form method="post" action="http://localhost/Tren/public/log/login">

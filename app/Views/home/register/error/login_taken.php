@@ -1,14 +1,4 @@
 
-<!-- header !-->
-<?php
-include('headfoot/header.php')
-?>
-
-<body>
-    <!-- menu & img !-->
-    <?php
-    include('headfoot/menu.php')
-    ?>
 <div class="reg">
     <h3>Error: Login name already exists.</h3>
     <h1></br>Create new account</h1>

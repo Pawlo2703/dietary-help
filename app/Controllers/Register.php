@@ -15,6 +15,7 @@ class Register extends Controller {
      */
 
     public function User() {
+        $this->header();
         $this->view('home/register/register');
     }
 
@@ -23,6 +24,7 @@ class Register extends Controller {
      */
 
     public function register() {
+        $this->header();
         $add = new User();
         $params = $this->getParameters();
 

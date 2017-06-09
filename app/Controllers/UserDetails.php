@@ -17,6 +17,7 @@ class UserDetails extends Controller {
      */
 
     public function display() {
+        $this->header();
         $user = new User();
         $macro = new Macronutrient();
         $person = new Person();
@@ -30,7 +31,6 @@ class UserDetails extends Controller {
         $person->loadPersonalData($id);
       
         $weight->getSevenWeightsLastWeek($id);
-        var_dump($weight->getSevenWeightsLastWeek($id));
   
         $data = [
             'user' => $user,

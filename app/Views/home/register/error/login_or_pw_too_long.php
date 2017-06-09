@@ -1,14 +1,4 @@
 
-<!-- header !-->
-<?php
-include __DIR__ . '/../../headfoot/header.php'
-?>
-
-<body>
-    <!-- menu & img !-->
-    <?php
-    include __DIR__ . '/../../headfoot/menu.php'
-    ?>
 <div class="reg">
     <h3>Error: Login or password is too long.</h3>
     <h1></br>Create new account</h1>

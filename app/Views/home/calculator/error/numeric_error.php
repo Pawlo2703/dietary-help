@@ -12,16 +12,8 @@ txtSelected = slction.selectedIndex;
 document.getElementById('textDiv').innerHTML = DivTxt[txtSelected];
 }
 </script>
-<!-- header !-->
-<?php
-include __DIR__ . '/../../headfoot/header.php'
-?>
 
-<body>
-    <!-- menu & img !-->
-    <?php
-    include __DIR__ . '/../../headfoot/menu.php'
-    ?>
+
 
 <div class="reg">
     <h3>Something went wrong, make sure that values of age, weight, height, time and times of week are digit!</h1>

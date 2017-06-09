@@ -12,11 +12,12 @@ use Tren\Models\Calculator\Activities\Person;
  * Class Calc
  */
 class Calculator extends Controller {
-    
+
     /**
      * Displays calculator forms
      */
     public function User() {
+        $this->header();
         $this->session->loginCheck();
         $id = ($this->session->get('zmienna2'));
         $macro = new Macronutrient();
@@ -32,6 +33,7 @@ class Calculator extends Controller {
      * 
      */
     public function setMacros() {
+        $this->header();
         $this->session->loginCheck();
         $params = $this->getParameters();
 

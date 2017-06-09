@@ -12,18 +12,11 @@ use Tren\Models\User\Macronutrient;
  */
 class Weight extends Controller {
 
-//    /**
-//     * Displays calculator forms
-//     */
-//    public function display() {
-//        $this->session->loginCheck();
-//        $this->view('home/weight_in');
-//    } do wyjebki chyba
-
     /**
      * 
      */
     public function saveWeight() {
+        $this->header();
         $this->session->loginCheck();
 
         $id = ($this->session->get('zmienna2'));
@@ -38,6 +31,7 @@ class Weight extends Controller {
     }
 
     public function weightCompare() {
+        $this->header();
         $this->session->loginCheck();
         $params = $this->getParameters();
         $id = ($this->session->get('zmienna2'));

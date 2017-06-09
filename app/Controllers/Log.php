@@ -16,6 +16,7 @@ class Log extends Controller {
      * Displays login form
      */
     public function User() {
+        $this->header();
 
         $this->view('home/login/login');
     }
@@ -24,6 +25,7 @@ class Log extends Controller {
      * Creates user SESSION
      */
     public function Login() {
+        $this->header();
 
         $user = new User();
         $macro = new User\Macronutrient;
@@ -62,9 +64,9 @@ class Log extends Controller {
      * Ends user session
      */
     public function Logout() {
+        $this->header();
         if ($result = $this->session->get('zmienna')) {
-            var_dump($result);
-            $this->session->destroy('zmienna');
+                       $this->session->destroy('zmienna');
             $this->session->destroy('zmienna2');
 
 

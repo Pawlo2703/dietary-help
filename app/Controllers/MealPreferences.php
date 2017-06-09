@@ -16,6 +16,7 @@ class MealPreferences extends Controller {
      * Displays form
      */
     public function User() {
+        $this->header();
         $this->session->loginCheck();
         $this->view('home/macronutrient/macronutirient_preferences');
     }
@@ -24,11 +25,12 @@ class MealPreferences extends Controller {
      * Saves user data
      */
     public function changeMacro() {
+        $this->header();
         $this->session->loginCheck();
         $params = $this->getParameters();
         $id = $this->session->get('zmienna2');
        
-        $macro = new Macronutrient; var_dump($params['prefs']);
+        $macro = new Macronutrient; 
         $macro->setMealPref($params['prefs']);      
         $macro->loadMacros($id);
         $macro->mealPreferences($id);

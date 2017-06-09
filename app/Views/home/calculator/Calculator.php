@@ -12,16 +12,6 @@ txtSelected = slction.selectedIndex;
 document.getElementById('textDiv').innerHTML = DivTxt[txtSelected];
 }
 </script>
-<!-- header !-->
-<?php
-include __DIR__ . '/../headfoot/header.php'
-?>
-
-<body>
-    <!-- menu & img !-->
-    <?php
-    include __DIR__ . '/../headfoot/menu.php'
-    ?>
 
 <div class="reg">
     <h1>Calculate your macro intake</h1>

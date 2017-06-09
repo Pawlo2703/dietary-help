@@ -162,8 +162,7 @@ class Macronutrient {
     }
 
     public function mealPreferences($id) {
-        var_dump($this->mealPref);
-        $this->calories = $this->calories - ($this->protein * self::PROTEIN_CALORIES);
+             $this->calories = $this->calories - ($this->protein * self::PROTEIN_CALORIES);
 
         
         

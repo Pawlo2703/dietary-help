@@ -17,6 +17,7 @@ class Macronutrients extends Controller {
      * Displays form
      */
     public function User() {
+        $this->header();
         $this->session->loginCheck();
         $id = ($this->session->get('zmienna2'));
         $macro = new Macronutrient();
@@ -34,6 +35,7 @@ class Macronutrients extends Controller {
      * Saves user data
      */
     public function setMacros() {
+        $this->header();
         $this->session->loginCheck();
         $params = $this->getParameters();
 

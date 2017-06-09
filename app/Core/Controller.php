@@ -23,6 +23,14 @@ class Controller {
         }
     }
 
+    public function header() {
+        if (($this->session->get('zmienna2')) != null) {
+            $this->view('home/headfoot/header_logged');
+        } else {
+            $this->view('home/headfoot/header');
+        }
+    }
+
     public function getParameters() {
         $params = array_merge($_POST, $_GET);
         if ($params) {

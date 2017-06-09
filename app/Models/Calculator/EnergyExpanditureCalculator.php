@@ -198,7 +198,7 @@ class EnergyExpanditureCalculator {
         } else if ($this->person->getState() == 'Long term cut') {
             $this->tdee = ($this->person->getBasicMetabolismRate() + ($this->tea / 7) + $this->neat + $this->tef) * self::LONG_TERM_CUT;
         }
-        var_dump($this->tdee);
+       
         return $this->tdee;
     }
 
