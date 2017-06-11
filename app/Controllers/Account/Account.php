@@ -1,6 +1,6 @@
 <?php
 
-namespace Tren\Controllers;
+namespace Tren\Controllers\Account;
 
 use Tren\Core\Controller;
 use Tren\Models\User;

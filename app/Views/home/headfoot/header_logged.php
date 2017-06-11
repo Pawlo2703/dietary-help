@@ -18,7 +18,7 @@
             <nav class="col-sm-8 text-right">
                 <p><a href="http://localhost/Tren/public/UserDetails/display">Home</a></p>
                 <p><a href="http://localhost/Tren/public/MealPreferences/user">Change macros</a></p>
-                <p><a href="http://localhost/Tren/public/account/display">Account</p>
+                <p><a href="http://localhost/Tren/public/account_account/display">Account</p>
                 <p><a href="http://localhost/Tren/public/log/logout">Log out</p>
             </nav>
         </div>
