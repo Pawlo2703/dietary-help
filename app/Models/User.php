@@ -29,6 +29,28 @@ class User {
     private $password;
 
     /**
+     *
+     * @var image 
+     */
+    private $image;
+
+    /**
+     * 
+     * @return string
+     */
+    public function getImage() {
+        return $this->image;
+    }
+
+    /**
+     * 
+     * @param string $image
+     */
+    public function setImage($image) {
+        $this->image = $image;
+    }
+
+    /**
      * 
      * @return int
      */
@@ -116,6 +138,7 @@ class User {
             $this->id = $result['id'];
             $this->login = $result['login'];
             $this->password = $result['password'];
+            $this->image = $result['image'];
         }
     }
 
@@ -165,6 +188,27 @@ class User {
 
         $this->database->updateRow('user', "password='$password' "
                 . "WHERE id = $id");
+    }
+
+    public function uploadImage($id) {
+       
+        if ($_FILES['image']['name']) {
+            if (!($_FILES['image']['error'])) {
+                $newFileName = strtolower($_FILES['image']['name']);
+                
+                if ($_FILES['image']['size'] > (1024000)) {
+                   return 0;
+                } else {
+                    $this->database->updateRow('user', "image='$id$newFileName' "
+                            . "WHERE id = $id");
+
+                    move_uploaded_file($_FILES['image']['tmp_name'], __DIR__ . '/../../public/images/' . $id . $newFileName);
+                    return true;
+                }
+            } else {
+                return 0;
+            }
+        }
     }
 
 }

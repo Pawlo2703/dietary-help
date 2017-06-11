@@ -23,7 +23,6 @@ class App {
      */
 
     public function __construct() {
-
         $url = $this->parseUrl();
         $nameClass = $this->parseNamespace($url);
 
@@ -46,15 +45,17 @@ class App {
         }
     }
 
-    public function parseUrl() {
+    /*
+     * 
+     */
 
+    public function parseUrl() {
         if (isset($_GET['url'])) {
             return $url = explode('/', filter_var(rtrim($_GET['url'], '/'), FILTER_SANITIZE_URL));
         }
     }
 
     public function parseNamespace($url) {
-
         if (isset($url[0])) {
             return $nameClass = explode('_', filter_var(rtrim($url[0], '_'), FILTER_SANITIZE_URL));
         }

@@ -5,9 +5,10 @@
     <table class="table">
         <tbody>
             <tr>
-                <td><a href="http://localhost/Tren/public/account/changePasswordForm">change password</a></td>
-                <td><a href="http://localhost/Tren/public/account/changeAvatar">change avatar</a></td>
-                <td><a href="http://localhost/Tren/public/account/changePersonalData">change personal details</a></td>
+                <td><a href="http://localhost/Tren/public/account_password/changePasswordForm">change password</a></td>
+                <td><img src="http://localhost/tren/public/images/<?= $data['user']->getImage() ?>" />
+                <td><a href="http://localhost/Tren/public/account_avatar/display">change avatar</a></td>
+                <td><a href="http://localhost/Tren/public/account_account/changePersonalData">change personal details</a></td>
             </tr>
         
     </table>

@@ -1,7 +1,7 @@
 
 <div class="reg">
     <h1>Change your password</h1>
-    <form method="post" action="http://localhost/Tren/public/account/changePassword">
+    <form method="post" action="http://localhost/Tren/public/account_password/changePassword">
 
         <label><b>Old password:</b></label> <input autocomplete="off" name="old" type="password" placeholder="">   
         <label><b>New password:</b></label> <input autocomplete="off" name="new" type="password" placeholder="">
