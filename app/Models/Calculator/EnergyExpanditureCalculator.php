@@ -8,7 +8,7 @@ use Tren\Models\Calculator\Activities\Cardio;
 use Tren\Models\Calculator\Activities\Workout;
 
 /**
- * Class Calculator
+ * Class EnergyExpanditureCalculator
  */
 class EnergyExpanditureCalculator {
     /* Thermic effect of food */

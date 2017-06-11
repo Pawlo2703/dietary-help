@@ -13,7 +13,7 @@
     
     <!-- footer !--> 
     <?php
-    include('headfoot/footer.php')
+    include __DIR__ . '/../../headfoot/footer.php'
     ?>
 
 

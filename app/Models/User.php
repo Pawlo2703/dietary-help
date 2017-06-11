@@ -3,6 +3,7 @@
 namespace Tren\Models;
 
 use Tren\Models\User\Macronutrient;
+
 /**
  * 
  * Class User
@@ -81,7 +82,7 @@ class User {
      */
     public function __construct() {
         $this->database = \Tren\Core\Database::getInstance();
-        //  
+//  
     }
 
     /**
@@ -156,7 +157,14 @@ class User {
             $result2 = $this->database->insertRow('user', "( `login`, `password`) VALUES(?,?)", [$this->login, $this->password]);
             return $result2;
         }
-            return NULL;
-        }
+        return NULL;
     }
-    
+
+    public function changePassword($id) {
+        $password = $this->password;
+
+        $this->database->updateRow('user', "password='$password' "
+                . "WHERE id = $id");
+    }
+
+}

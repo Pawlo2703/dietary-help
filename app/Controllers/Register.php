@@ -44,7 +44,7 @@ class Register extends Controller {
         if ($add->register() == !NULL) {
             $this->view('home/login/new_user_login');
         } else {
-            $this->view('home/register/error/taken');
+            $this->view('home/register/error/login_taken');
         }
     }
 
